@@ -1,0 +1,47 @@
+import React from "react";
+
+class Header extends React.Component {
+  render() {
+    return (
+      <>
+        <header id="header" className="fixed-top">
+          <div className="container d-flex">
+            <div className="logo mr-auto">
+              <h1 className="text-light">
+                <a href="index.html">
+                  <span>Adiz</span>
+                </a>
+              </h1>
+            </div>
+            <nav className="nav-menu d-none d-lg-block">
+              <ul>
+                <li>
+                  <a
+                    href="#signupModel"
+                    className="trigger-btn"
+                    data-toggle="modal"
+                    href="#contact"
+                  >
+                    Join
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#myModal"
+                    className="trigger-btn"
+                    data-toggle="modal"
+                    href="#contact"
+                  >
+                    Login
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </header>
+      </>
+    );
+  }
+}
+
+export default Header;

@@ -1,16 +1,18 @@
 import React from "react";
+import Header from "../../views/header";
+import SubSection from "../../views/sub-section";
+import Footer from "../../views/footer";
+import MainSection from "../../views/main-section";
 
 class Dashboard extends React.Component {
-  
   render() {
     return (
-      <div className="container">
-        <div className="row">
-            <div className="col-xs-12 clocks-parent">
-              Demo setup
-            </div>
-        </div>
-      </div>
+      <>
+        <Header />
+        <SubSection />
+        <MainSection />
+        <Footer />
+      </>
     );
   }
 }
