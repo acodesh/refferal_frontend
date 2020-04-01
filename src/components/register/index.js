@@ -1,8 +1,59 @@
 import React from "react";
+import InputField from "../../views/input-field";
+import ContainedButtons from "../../views/contained-buttons";
 
 class Register extends React.Component {
+  state = {
+    username: "",
+    password: "",
+    fieldValidations: {
+      username: false,
+      password: false
+    }
+  };
+  handleChange = (field, e) => {
+    const {target} = e;
+    const {fieldValidations} = this.state;
+    if (
+      (field === "username" && !fieldValidations.username) ||
+      (field === "password" && !fieldValidations.password)
+    ) {
+      this.setState({
+        [field]: target.value,
+        fieldValidations: {[field]: false}
+      });
+    } else {
+      this.setState({[field]: target.value});
+    }
+  };
+
+  handleSubmitonClick = () => {
+    const {username, password} = this.state;
+
+    let validation = true;
+    let errorIn;
+    if (!username) {
+      errorIn = {username: true};
+      validation = false;
+    }
+    if (!password) {
+      errorIn = {...errorIn, password: true};
+      validation = false;
+    }
+
+    if (validation) {
+      // this.props.addBook({
+      //   name,
+      //   password
+      // });
+    } else {
+      this.setState({fieldValidations: errorIn});
+    }
+  };
+
   render() {
     const {action} = this.props;
+    const {username, password, fieldValidations} = this.state;
     return (
       <>
         <div id="signupModel" className="modal fade">
@@ -23,30 +74,30 @@ class Register extends React.Component {
                 </div>
                 <div className="modal-body">
                   <div className="form-group">
-                    <label>Username</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      required="required"
+                    <InputField
+                      label={"Username"}
+                      name="username"
+                      value={username}
+                      error={fieldValidations.username}
+                      handleChange={this.handleChange.bind(this, "username")}
                     />
                   </div>
                   <div className="form-group">
-                    <div className="clearfix">
-                      <label>Password</label>
-                    </div>
+                    <div className="clearfix"></div>
 
-                    <input
-                      type="password"
-                      className="form-control"
-                      required="required"
+                    <InputField
+                      label={"Password"}
+                      name="password"
+                      value={password}
+                      error={fieldValidations.password}
+                      handleChange={this.handleChange.bind(this, "password")}
                     />
                   </div>
                 </div>
                 <div className="modal-footer">
-                  <input
-                    type="submit"
-                    className="btn btn-primary pull-right"
-                    value="Login"
+                  <ContainedButtons
+                    title="Register"
+                    onClick={() => this.handleSubmitonClick()}
                   />
                 </div>
                 Already have account?{" "}
