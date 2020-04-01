@@ -2,59 +2,62 @@ import React from "react";
 
 class Register extends React.Component {
   render() {
+    const {action} = this.props;
     return (
       <>
-        <div id="signupModel" class="modal fade">
-          <div class="modal-dialog modal-login">
-            <div class="modal-content">
+        <div id="signupModel" className="modal fade">
+          <div className="modal-dialog modal-login">
+            <div className="modal-content">
               <form action="/examples/actions/confirmation.php" method="post">
-                <div class="modal-header">
-                  <h4 class="modal-title">SignUp</h4>
+                <div className="modal-header">
+                  <h4 className="modal-title">SignUp</h4>
                   <button
+                    onClick={() => action("registerPopUp")}
                     type="button"
-                    class="close"
+                    className="close"
                     data-dismiss="modal"
                     aria-hidden="true"
                   >
                     &times;
                   </button>
                 </div>
-                <div class="modal-body">
-                  <div class="form-group">
+                <div className="modal-body">
+                  <div className="form-group">
                     <label>Username</label>
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       required="required"
                     />
                   </div>
-                  <div class="form-group">
-                    <div class="clearfix">
+                  <div className="form-group">
+                    <div className="clearfix">
                       <label>Password</label>
                     </div>
 
                     <input
                       type="password"
-                      class="form-control"
+                      className="form-control"
                       required="required"
                     />
                   </div>
                 </div>
-                <div class="modal-footer">
+                <div className="modal-footer">
                   <input
                     type="submit"
-                    class="btn btn-primary pull-right"
+                    className="btn btn-primary pull-right"
                     value="Login"
                   />
                 </div>
                 Already have account?{" "}
-                <a href="#" class="pull-right text-muted">
+                <a href="#" className="pull-right text-muted">
                   <small>Login</small>
                 </a>
               </form>
             </div>
           </div>
         </div>
+        <div class="modal-backdrop fade show"></div>
       </>
     );
   }

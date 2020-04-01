@@ -2,6 +2,8 @@ import React from "react";
 
 class Header extends React.Component {
   render() {
+    const {action} = this.props;
+
     return (
       <>
         <header id="header" className="fixed-top">
@@ -17,6 +19,7 @@ class Header extends React.Component {
               <ul>
                 <li>
                   <a
+                    onClick={() => action("registerPopUp")}
                     href="#signupModel"
                     className="trigger-btn"
                     data-toggle="modal"
@@ -27,6 +30,7 @@ class Header extends React.Component {
                 </li>
                 <li>
                   <a
+                    onClick={() => action("loginPopUp")}
                     href="#myModal"
                     className="trigger-btn"
                     data-toggle="modal"
