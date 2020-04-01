@@ -2,6 +2,7 @@ import React from "react";
 
 class Login extends React.Component {
   render() {
+    const {action} = this.props;
     return (
       <>
         <div id="myModal" class="modal fade">
@@ -11,6 +12,7 @@ class Login extends React.Component {
                 <div class="modal-header">
                   <h4 class="modal-title">Login</h4>
                   <button
+                    onClick={() => action("loginPopUp")}
                     type="button"
                     class="close"
                     data-dismiss="modal"
@@ -57,6 +59,7 @@ class Login extends React.Component {
             </div>
           </div>
         </div>
+        <div class="modal-backdrop fade show"></div>
       </>
     );
   }
