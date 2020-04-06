@@ -49,7 +49,7 @@ class HttpHelper {
     }
     return {
       data: null,
-      error: error || data,
+      error: error || data.response.message,
       status,
     };
   }

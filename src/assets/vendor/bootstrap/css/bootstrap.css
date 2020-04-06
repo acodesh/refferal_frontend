@@ -6417,14 +6417,14 @@ a.close.disabled {
   align-items: flex-start;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  padding: 1rem 1rem;
+  padding: 2rem 1rem 1rem 1rem;
   border-bottom: 1px solid #dee2e6;
   border-top-left-radius: calc(0.3rem - 1px);
   border-top-right-radius: calc(0.3rem - 1px);
 }
 
 .modal-header .close {
-  padding: 1rem 1rem;
+  padding: 2rem 1rem 1rem 1rem;
   margin: -1rem -1rem -1rem auto;
 }
 
@@ -6453,6 +6453,10 @@ a.close.disabled {
   border-top: 1px solid #dee2e6;
   border-bottom-right-radius: calc(0.3rem - 1px);
   border-bottom-left-radius: calc(0.3rem - 1px);
+
+  display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .modal-footer > * {
@@ -10533,6 +10537,7 @@ a.text-dark:focus {
 
 .text-muted {
   color: #6c757d !important;
+  padding-left: 12px;
 }
 
 .text-black-50 {

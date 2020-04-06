@@ -19,7 +19,7 @@ class Header extends React.Component {
               <ul>
                 <li>
                   <a
-                    onClick={() => action("registerPopUp")}
+                    onClick={(e) => action(e,"registerPopUp")}
                     href="#signupModel"
                     className="trigger-btn"
                     data-toggle="modal"
@@ -30,12 +30,12 @@ class Header extends React.Component {
                 </li>
                 <li>
                   <a
-                    onClick={() => action("loginPopUp")}
+                    onClick={(e) => action(e, "loginPopUp")}
                     href="#myModal"
                     className="trigger-btn"
                     data-toggle="modal"
                     href="#contact"
-                  >
+                  > 
                     Login
                   </a>
                 </li>

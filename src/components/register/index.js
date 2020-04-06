@@ -52,7 +52,7 @@ class Register extends React.Component {
   };
 
   render() {
-    const {action} = this.props;
+    const {action, manageLogin} = this.props;
     const {username, password, fieldValidations} = this.state;
     return (
       <>
@@ -63,7 +63,7 @@ class Register extends React.Component {
                 <div className="modal-header">
                   <h4 className="modal-title">SignUp</h4>
                   <button
-                    onClick={() => action("registerPopUp")}
+                    onClick={(e) => action(e, "registerPopUp")}
                     type="button"
                     className="close"
                     data-dismiss="modal"
@@ -95,15 +95,19 @@ class Register extends React.Component {
                   </div>
                 </div>
                 <div className="modal-footer">
+                <div>
                   <ContainedButtons
                     title="Register"
                     onClick={() => this.handleSubmitonClick()}
                   />
+                  </div>
+                  <div>
+                    Already have account?{" "}
+                    <a href="#" className="pull-right text-muted" onClick={(e) => manageLogin(e)}>
+                      <small>Login</small>
+                    </a>
+                  </div>
                 </div>
-                Already have account?{" "}
-                <a href="#" className="pull-right text-muted">
-                  <small>Login</small>
-                </a>
               </form>
             </div>
           </div>
