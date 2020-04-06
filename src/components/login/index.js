@@ -1,13 +1,15 @@
 import React from "react";
 import InputField from "../../views/input-field";
 import ContainedButtons from "../../views/contained-buttons";
+import {connect} from "react-redux";
+import {loginUser} from "../../actions/user-action-type";
 
 class Login extends React.Component {
   state = {
-    username: "",
+    email: "",
     password: "",
     fieldValidations: {
-      username: false,
+      email: false,
       password: false
     }
   };
@@ -15,7 +17,7 @@ class Login extends React.Component {
     const {target} = e;
     const {fieldValidations} = this.state;
     if (
-      (field === "username" && !fieldValidations.username) ||
+      (field === "email" && !fieldValidations.email) ||
       (field === "password" && !fieldValidations.password)
     ) {
       this.setState({
@@ -28,12 +30,12 @@ class Login extends React.Component {
   };
 
   handleSubmitonClick = () => {
-    const {username, password} = this.state;
+    const {email, password} = this.state;
 
     let validation = true;
     let errorIn;
-    if (!username) {
-      errorIn = {username: true};
+    if (!email) {
+      errorIn = {email: true};
       validation = false;
     }
     if (!password) {
@@ -42,51 +44,50 @@ class Login extends React.Component {
     }
 
     if (validation) {
-      // this.props.addBook({
-      //   name,
-      //   password
-      // });
+       this.props.loginUser({
+         email,
+         password
+       });
     } else {
       this.setState({fieldValidations: errorIn});
     }
   };
 
   render() {
-    const {action} = this.props;
+    const {action, manageForgetPassword, userLoginError} = this.props;
 
-    const {username, password, fieldValidations} = this.state;
+    const {email, password, fieldValidations} = this.state;
 
     return (
       <>
-        <div id="myModal" class="modal fade">
-          <div class="modal-dialog modal-login">
-            <div class="modal-content">
-              <form action="/examples/actions/confirmation.php" method="post">
-                <div class="modal-header">
-                  <h4 class="modal-title">Login</h4>
+        <div id="myModal" className="modal fade">
+          <div className="modal-dialog modal-login">
+            <div className="modal-content">
+                <div className="modal-header">
+                  <h4 className="modal-title">Login</h4>
                   <button
-                    onClick={() => action("loginPopUp")}
+                    onClick={(e) => action(e, "loginPopUp")}
                     type="button"
-                    class="close"
+                    className="close"
                     data-dismiss="modal"
                     aria-hidden="true"
                   >
                     &times;
                   </button>
                 </div>
-                <div class="modal-body">
-                  <div class="form-group">
+                <div className="modal-body">
+                  <div className="form-group">
                     <InputField
                       label={"Username"}
-                      name="username"
-                      value={username}
-                      error={fieldValidations.username}
-                      handleChange={this.handleChange.bind(this, "username")}
+                      name="email"
+                      value={email}
+                      error={fieldValidations.email}
+                      handleChange={this.handleChange.bind(this, "email")}
                     />
                   </div>
-                  <div class="form-group">
-                    <div class="clearfix">
-                      <a href="#" class="pull-right text-muted">
+                  <div className="form-group">
+                    <div className="clearfix">
+                      <a href="#" className="pull-right text-muted" onClick={(e) => manageForgetPassword(e)}>
                         <small>Forgot?</small>
                       </a>
                     </div>
@@ -99,9 +100,10 @@ class Login extends React.Component {
                       handleChange={this.handleChange.bind(this, "password")}
                     />
                   </div>
+                  {userLoginError && <div>{userLoginError}</div>}
                 </div>
-                <div class="modal-footer">
-                  <label class="checkbox-inline pull-left">
+                <div className="modal-footer">
+                  <label className="checkbox-inline pull-left">
                     <input type="checkbox" /> Remember me
                   </label>
                   <ContainedButtons
@@ -109,14 +111,14 @@ class Login extends React.Component {
                     onClick={() => this.handleSubmitonClick()}
                   />
                 </div>
-              </form>
             </div>
           </div>
         </div>
-        <div class="modal-backdrop fade show"></div>
+        <div className="modal-backdrop fade show"></div>
       </>
     );
   }
 }
 
-export default Login;
+const mapStateToProps = ({User: {userLoginError, isLoadingUserLogin}}) => ({userLoginError, isLoadingUserLogin});
+export default connect(mapStateToProps, {loginUser})(Login);
