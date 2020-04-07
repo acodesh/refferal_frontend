@@ -100,9 +100,9 @@ class Login extends React.Component {
                       handleChange={this.handleChange.bind(this, "password")}
                     />
                   </div>
-                  {userLoginError && <div>{userLoginError}</div>}
                 </div>
                 <div className="modal-footer">
+                {userLoginError && <div className="alert alert-danger">{userLoginError}</div>}
                   <label className="checkbox-inline pull-left">
                     <input type="checkbox" /> Remember me
                   </label>
