@@ -23,6 +23,7 @@ export default function BasicTextFields(props) {
         error={props.error}
         onChange={props.handleChange}
         value={props.value}
+        type={props.type || 'text'}
       />
     </form>
   );

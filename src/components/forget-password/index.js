@@ -1,6 +1,8 @@
 import React from "react";
 import InputField from "../../views/input-field";
 import ContainedButtons from "../../views/contained-buttons";
+import {forgetPassword} from "../../actions/user-action-type";
+import {connect} from "react-redux";
 
 class ForgetPassword extends React.Component {
   state = {
@@ -35,17 +37,16 @@ class ForgetPassword extends React.Component {
     }
 
     if (validation) {
-      // this.props.addBook({
-      //   name,
-      //   password
-      // });
+      this.props.forgetPassword({
+        email
+      });
     } else {
       this.setState({fieldValidations: errorIn});
     }
   };
 
   render() {
-    const {action} = this.props;
+    const {action, forgetPasswordError, forgetPasswordStatus} = this.props;
 
     const {email, fieldValidations} = this.state;
 
@@ -79,6 +80,8 @@ class ForgetPassword extends React.Component {
                   </div>
                 </div>
                 <div class="modal-footer">
+                {<div class="alert alert-success">A password reset link will be emailed to you provided that account with this email exists. </div>}
+                {forgetPasswordError && <div className="alert alert-danger">{forgetPasswordError}</div>}
                   <ContainedButtons
                     title="Send Password"
                     onClick={() => this.handleSubmitonClick()}
@@ -93,5 +96,5 @@ class ForgetPassword extends React.Component {
     );
   }
 }
-
-export default ForgetPassword;
+const mapStateToProps = ({User: {forgetPasswordError, isLoadingForgetPassword, forgetPasswordStatus}}) => ({forgetPasswordError, isLoadingForgetPassword, forgetPasswordStatus});
+export default connect(mapStateToProps, {forgetPassword})(ForgetPassword);

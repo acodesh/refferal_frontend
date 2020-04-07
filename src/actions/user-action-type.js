@@ -11,3 +11,27 @@ export const loginUserSuccess = createAction(LOGIN_USER_SUCCESS);
 
 export const LOGIN_USER_FAILURE = "LOGIN_USER_FAILURE";
 export const loginUserFailure = createAction(LOGIN_USER_FAILURE);
+
+export const SIGN_UP_USER = "SIGN_UP_USER";
+export const userSignUp = createAction(SIGN_UP_USER);
+
+export const SIGN_UP_USER_REQUEST = "SIGN_UP_USER_REQUEST";
+export const userSignUpRequest = createAction(SIGN_UP_USER_REQUEST);
+
+export const SIGN_UP_USER_SUCCESS = "SIGN_UP_USER_SUCCESS";
+export const userSignUpSuccess = createAction(SIGN_UP_USER_SUCCESS);
+
+export const SIGN_UP_USER_FAILURE = "SIGN_UP_USER_FAILURE";
+export const userSignUpFailure = createAction(SIGN_UP_USER_FAILURE);
+
+export const FORGET_PASSWORD = "FORGET_PASSWORD";
+export const forgetPassword = createAction(FORGET_PASSWORD);
+
+export const FORGET_PASSWORD_REQUEST = "FORGET_PASSWORD_REQUEST";
+export const forgetPasswordRequest = createAction(FORGET_PASSWORD_REQUEST);
+
+export const FORGET_PASSWORD_SUCCESS = "FORGET_PASSWORD_SUCCESS";
+export const forgetPasswordSuccess = createAction(FORGET_PASSWORD_SUCCESS);
+
+export const FORGET_PASSWORD_FAILURE = "FORGET_PASSWORD_FAILURE";
+export const forgetPasswordFailure = createAction(FORGET_PASSWORD_FAILURE);
