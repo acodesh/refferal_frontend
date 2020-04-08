@@ -1725,3 +1725,19 @@ section {
 .modal-login .hint-text a {
   color: #999;
 }
+
+
+/*new css*/
+
+.dash-info {
+  background: #ddd;
+  margin: 2px;
+}
+.leftnav {
+  list-style: none;
+}
+
+.profileimage {
+  width:100px;
+}
+
