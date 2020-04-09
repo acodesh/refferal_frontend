@@ -41,6 +41,13 @@ class Header extends React.Component {
                 </li>
               </ul>
             </nav>
+            <nav class="nav-menu d-none d-lg-block">
+              <ul>
+              <li><a href="#signupModel" class="trigger-btn" data-toggle="modal" href="#contact">My Account</a></li>
+                <li><a href="createpost.html" class="trigger-btn" >Post</a></li>
+
+              </ul>
+            </nav>
           </div>
         </header>
       </>
