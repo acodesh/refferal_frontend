@@ -10,6 +10,18 @@ class Utils {
           httpHelper: this.httpHelper,
         };
     }
+    
+    getLocalStorageData = (key) => {
+      const data = localStorage.getItem(key);
+    
+      return JSON.parse(data);
+    };
+    
+    setLocalStorageData = (key, data) => {
+      localStorage.setItem(key, data);
+    
+      return true;
+    };
 }
 
 export default Utils;

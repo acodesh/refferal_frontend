@@ -1,11 +1,59 @@
 import Dashboard from "../components/dashboard";
+import MyProfile from "../components/my-profile";
+import UserLanding from "../components/user-landing";
+import Landing from "../components/landing";
+import AccessControlRoutes from './access-control-routes';
+import MyPosts from '../components/my-posts';
+import MyPayment from '../components/my-payment';
+import MyReferrals from '../components/my-referrals';
 
 const Paths = [
   {
-    component: Dashboard,
+    component: Landing,
     exact: true,
     path: "/",
-    title: "Dashboard"
-  }
+    title: "Landing"
+  },
+  {
+    component: AccessControlRoutes,
+    exact: false,
+    path: '/',
+    routes: {
+      ['user']: {
+        initalComponent: Dashboard,
+        routes: [
+          {
+            component: UserLanding,
+            exact: true,
+            path: '/dashboard',
+            title: 'UserLanding',
+          },
+          {
+            component: MyProfile,
+            exact: true,
+            path: '/my-profile',
+            title: 'MyProfile',
+          },
+          {
+            component: MyPosts,
+            exact: true,
+            path: '/my-posts',
+            title: 'Posts',
+          },{
+            component: MyReferrals,
+            exact: true,
+            path: '/my-referrals',
+            title: 'My Referrals',
+          },{
+            component: MyPayment,
+            exact: true,
+            path: '/my-payment',
+            title: 'Payment',
+          },
+        ],
+        urlPrefix: '/user',
+        },
+      }
+    }
 ];
 export default Paths;
