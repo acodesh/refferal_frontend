@@ -1725,7 +1725,7 @@ section {
 .modal-login .hint-text a {
   color: #999;
 }
- .dash-info {
+.dash-info {
   background: #ddd;
   margin: 2px;
 }
@@ -1733,32 +1733,31 @@ section {
   list-style: none;
 }
 
- .profileimage {
-  width:100px;
+.profileimage {
+  width: 100px;
 }
 
-
-.logo-container{
+.logo-container {
   left: 50px;
   position: absolute;
   top: 20px;
-   z-index: 3;
+  z-index: 3;
 }
-.logo-container .logo{
+.logo-container .logo {
   overflow: hidden;
   border-radius: 50%;
   border: 1px solid #333333;
   width: 60px;
   float: left;
 }
-.logo-container .brand{
+.logo-container .brand {
   font-size: 18px;
-  color: #FFFFFF;
+  color: #ffffff;
   line-height: 20px;
   float: left;
   margin-left: 10px;
   margin-top: 10px;
-  width: 60px
+  width: 60px;
 }
 .container-dashboard {
   min-height: 485px;
@@ -1775,14 +1774,20 @@ section {
   border-right: 1px solid #ddd;
   height: 420px;
 }
-.container-dashboard ul a{
+.container-dashboard ul a {
   font-size: 1.3rem;
-    color: black;
+  color: black;
 }
-.container-dashboard ul li{
+.container-dashboard ul li {
   display: flex;
   justify-content: left;
   align-items: center;
   padding: 10px;
   border-bottom: 1px solid #ddd;
+}
+
+.container-posts {
+  padding-top: 100px;
+  padding-bottom: 20px;
+  height: 420px;
 }
