@@ -1775,7 +1775,7 @@ section {
   height: 420px;
 }
 .container-dashboard ul a {
-  font-size: 1.3rem;
+  font-size: 1rem;
   color: black;
 }
 .container-dashboard ul li {
@@ -1790,4 +1790,13 @@ section {
   padding-top: 100px;
   padding-bottom: 20px;
   height: 420px;
+}
+.landing-card {
+  padding-left: 30px;
+  display: flex;
+justify-content: space-between;
+
+}
+.landing-card-two {
+  padding-top: 20px;
 }

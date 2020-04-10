@@ -1,5 +1,6 @@
 import React from "react";
 import history from "../../routes/history";
+import Link from '@material-ui/core/Link';
 
 class Header extends React.Component {
   onClickHandlerPosts = (e) => {
@@ -26,10 +27,9 @@ class Header extends React.Component {
                 <li>
                   <a
                     onClick={(e) => action(e, "registerPopUp")}
-                    href="#signupModel"
                     className="trigger-btn"
                     data-toggle="modal"
-                    href="#contact"
+                    href=""
                   >
                     Join
                   </a>
@@ -37,10 +37,9 @@ class Header extends React.Component {
                 <li>
                   <a
                     onClick={(e) => action(e, "loginPopUp")}
-                    href="#myModal"
                     className="trigger-btn"
                     data-toggle="modal"
-                    href="#contact"
+                    href=""
                   >
                     Login
                   </a>
@@ -51,22 +50,18 @@ class Header extends React.Component {
               <ul>
                 <li>
                   <a
-                    href="#signupModel"
+                    href=""
                     class="trigger-btn"
                     data-toggle="modal"
-                    href="#contact"
+                    
                   >
                     My Account
                   </a>
                 </li>
                 <li>
-                  <a
-                    href=""
-                    class="trigger-btn"
-                    onClick={(e) => this.onClickHandlerPosts(e)}
-                  >
-                    Post
-                  </a>
+                <Link variant="subtitle1" href="/posts">
+                  Post
+              </Link>
                 </li>
               </ul>
             </nav>
