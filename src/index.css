@@ -1789,14 +1789,26 @@ section {
 .container-posts {
   padding-top: 100px;
   padding-bottom: 20px;
-  height: 420px;
 }
 .landing-card {
   padding-left: 30px;
   display: flex;
-justify-content: space-between;
-
+  justify-content: space-between;
 }
 .landing-card-two {
   padding-top: 20px;
+}
+.container {
+  max-width: 70% !important;
+}
+ul {
+  padding-inline-start: 0px;
+}
+.container-header {
+  color: #fff !important;
+  background-color: #283e4b !important;
+  padding: 0.01em 16px;
+}
+.container-header h3 {
+  padding-top: 7px;
 }
