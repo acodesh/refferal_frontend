@@ -1,6 +1,12 @@
 import React from "react";
+import history from "../../routes/history";
 
 class Header extends React.Component {
+  onClickHandlerPosts = (e) => {
+    e.preventDefault();
+    history.push("/posts");
+  };
+
   render() {
     const {action} = this.props;
 
@@ -19,7 +25,7 @@ class Header extends React.Component {
               <ul>
                 <li>
                   <a
-                    onClick={(e) => action(e,"registerPopUp")}
+                    onClick={(e) => action(e, "registerPopUp")}
                     href="#signupModel"
                     className="trigger-btn"
                     data-toggle="modal"
@@ -35,7 +41,7 @@ class Header extends React.Component {
                     className="trigger-btn"
                     data-toggle="modal"
                     href="#contact"
-                  > 
+                  >
                     Login
                   </a>
                 </li>
@@ -43,9 +49,25 @@ class Header extends React.Component {
             </nav>
             <nav class="nav-menu d-none d-lg-block">
               <ul>
-              <li><a href="#signupModel" class="trigger-btn" data-toggle="modal" href="#contact">My Account</a></li>
-                <li><a href="createpost.html" class="trigger-btn" >Post</a></li>
-
+                <li>
+                  <a
+                    href="#signupModel"
+                    class="trigger-btn"
+                    data-toggle="modal"
+                    href="#contact"
+                  >
+                    My Account
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href=""
+                    class="trigger-btn"
+                    onClick={(e) => this.onClickHandlerPosts(e)}
+                  >
+                    Post
+                  </a>
+                </li>
               </ul>
             </nav>
           </div>
