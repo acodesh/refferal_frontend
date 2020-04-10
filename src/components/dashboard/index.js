@@ -46,12 +46,12 @@ class Dashboard extends React.Component {
                     <div>
                         <ul className="leftnav">
                         <li>
-                          <DashboardIcon style={{color: activeNav == "dashboard" ? "rgb(0, 156, 234)" : "rgba(0, 0, 0, 0.54)"}}/>{" "}
-                          <a  style={{color: activeNav == "dashboard" ? "rgb(0, 156, 234)" : "rgba(0, 0, 0, 0.54)"} } href="" onClick={(e)=> this.changeView(e, '/user/dashboard')}>Dashboard</a></li>
-                        <li><PersonIcon style={{color: activeNav == "myprofile" ? "rgb(0, 156, 234)" : "rgba(0, 0, 0, 0.54)"} }/> {" "}<a  style={{color: activeNav == "myprofile" ? "rgb(0, 156, 234)" : "rgba(0, 0, 0, 0.54)"} } href="" onClick={(e)=> this.changeView(e, '/user/my-profile')}>My Profile</a></li>
-                        <li><PostAddIcon style={{color: activeNav == "myposts" ? "rgb(0, 156, 234)" : "rgba(0, 0, 0, 0.54)"} }/> {" "}<a  style={{color: activeNav == "myposts" ? "rgb(0, 156, 234)" : "rgba(0, 0, 0, 0.54)"} } href="" onClick={(e)=> this.changeView(e, '/user/my-posts')}>My Posts</a></li>
-                        <li><GroupAddIcon style={{color: activeNav == "myreferrals" ? "rgb(0, 156, 234)" : "rgba(0, 0, 0, 0.54)"} }/> {" "}<a  style={{color: activeNav == "myreferrals" ? "rgb(0, 156, 234)" : "rgba(0, 0, 0, 0.54)"} } href="" onClick={(e)=> this.changeView(e, '/user/my-referrals')}>My Referrals</a></li>
-                        <li><MonetizationOnIcon style={{color: activeNav == "mypayment" ? "rgb(0, 156, 234)" : "rgba(0, 0, 0, 0.54)"} }/> {" "}<a  style={{color: activeNav == "mypayment" ? "rgb(0, 156, 234)" : "rgba(0, 0, 0, 0.54)"} } href="" onClick={(e)=> this.changeView(e, '/user/my-payment')}>My Payment</a></li>
+                          <DashboardIcon style={{color: activeNav == "dashboard" ? "rgb(0, 156, 234)" : "rgb(0,0,0)"}}/>{" "}
+                          <a  style={{color: activeNav == "dashboard" ? "rgb(0, 156, 234)" : "rgb(0,0,0)"} } href="" onClick={(e)=> this.changeView(e, '/user/dashboard')}>Dashboard</a></li>
+                        <li><PersonIcon style={{color: activeNav == "myprofile" ? "rgb(0, 156, 234)" : "rgb(0,0,0)"} }/> {" "}<a  style={{color: activeNav == "myprofile" ? "rgb(0, 156, 234)" : "rgb(0,0,0)"} } href="" onClick={(e)=> this.changeView(e, '/user/my-profile')}>My Profile</a></li>
+                        <li><PostAddIcon style={{color: activeNav == "myposts" ? "rgb(0, 156, 234)" : "rgb(0,0,0)"} }/> {" "}<a  style={{color: activeNav == "myposts" ? "rgb(0, 156, 234)" : "rgb(0,0,0)"} } href="" onClick={(e)=> this.changeView(e, '/user/my-posts')}>My Posts</a></li>
+                        <li><GroupAddIcon style={{color: activeNav == "myreferrals" ? "rgb(0, 156, 234)" : "rgb(0,0,0)"} }/> {" "}<a  style={{color: activeNav == "myreferrals" ? "rgb(0, 156, 234)" : "rgb(0,0,0)"} } href="" onClick={(e)=> this.changeView(e, '/user/my-referrals')}>My Referrals</a></li>
+                        <li><MonetizationOnIcon style={{color: activeNav == "mypayment" ? "rgb(0, 156, 234)" : "rgb(0,0,0)"} }/> {" "}<a  style={{color: activeNav == "mypayment" ? "rgb(0, 156, 234)" : "rgb(0,0,0)"} } href="" onClick={(e)=> this.changeView(e, '/user/my-payment')}>My Payment</a></li>
                         </ul>
                     </div>
                 </div>

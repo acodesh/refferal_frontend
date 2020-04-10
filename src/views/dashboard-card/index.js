@@ -1,16 +1,17 @@
 import React from "react";
+import Card from '@material-ui/core/Card';
 
 class DashboardCard extends React.Component {
   render() {
-      const {title,other,icon} = this.props;
+    const {title,other,icon, color: cardcolor} = this.props;
     return (
-      <>
-        <div className="col-lg-3 dash-info aos-init aos-animate" data-aos="fade-up">
+      <Card style={{width: '25%',padding: '10px', backgroundColor: cardcolor}}>
+        <div className="" data-aos="fade-up">
             <i className={icon}></i>
             <h4>{title}</h4>
             <p>{other}</p>
         </div>
-      </>
+      </Card>
     );
   }
 }
