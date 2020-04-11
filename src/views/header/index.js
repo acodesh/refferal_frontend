@@ -1,13 +1,18 @@
 import React from "react";
 import history from "../../routes/history";
 import Link from "@material-ui/core/Link";
+import {connect} from "react-redux";
+import {logoutAction} from "../../actions/user-action-type";
 
 class Header extends React.Component {
   onClickHandlerPosts = (e) => {
     e.preventDefault();
     history.push("/posts");
   };
-
+  handelLogoutClick = (e) => {
+    e.preventDefault();
+    this.props.logoutAction();
+  };
   render() {
     const {action} = this.props;
 
@@ -44,6 +49,11 @@ class Header extends React.Component {
                     Login
                   </a>
                 </li>
+                <li>
+                  <Link variant="subtitle1" href="/posts">
+                    Post
+                  </Link>
+                </li>
               </ul>
             </nav>
             <nav class="nav-menu d-none d-lg-block">
@@ -54,9 +64,14 @@ class Header extends React.Component {
                   </Link>
                 </li>
                 <li>
-                  <Link variant="subtitle1" href="/posts">
-                    Post
-                  </Link>
+                  <a
+                    onClick={(e) => this.handelLogoutClick(e)}
+                    className="trigger-btn"
+                    data-toggle="modal"
+                    href=""
+                  >
+                    Logout
+                  </a>
                 </li>
               </ul>
             </nav>
@@ -67,4 +82,4 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+export default connect(null, {logoutAction})(Header);

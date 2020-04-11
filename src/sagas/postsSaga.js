@@ -1,4 +1,4 @@
-import {call, put, takeLatest} from "redux-saga/effects";
+import {call, put, takeLatest, all} from "redux-saga/effects";
 import {
   fetchPostRequest,
   fetchPostSuccess,
@@ -119,13 +119,13 @@ export function* addNewPost({payload: postData}) {
 }
 
 function* posts() {
-  yield [
+  yield all([
     takeLatest(FETCH_POST, getPosts),
     takeLatest(FETCH_USER_POST, getUserPosts),
     takeLatest(FETCH_SINGLE_POST, getSinglePost),
     takeLatest(FETCH_SINGLE_USER_POST, getSingleUserPost),
     takeLatest(ADD_POST, addNewPost),
-  ];
+  ]);
 }
 
 export default posts;

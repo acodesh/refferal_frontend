@@ -1,4 +1,4 @@
-import {call, put, takeLatest} from "redux-saga/effects";
+import {call, put, takeLatest, all} from "redux-saga/effects";
 import {
   fetchUserDashboardRequest,
   fetchUserDashboardSuccess,
@@ -12,7 +12,7 @@ const {
   httpHelper: {getRequest, postRequest},
 } = new Utils().getAll();
 
-export function* fetchDashboardDetails() {
+function* fetchDashboardDetails() {
   const payload = {
     url: `${CONSTANTS.CONTACT_SERVICE_URL}/users/dashboard`,
   };
@@ -29,7 +29,7 @@ export function* fetchDashboardDetails() {
 }
 
 function* dashboard() {
-  yield [takeLatest(FETCH_USER_DASHBOARD, fetchDashboardDetails)];
+  yield all([takeLatest(FETCH_USER_DASHBOARD, fetchDashboardDetails)]);
 }
 
 export default dashboard;
