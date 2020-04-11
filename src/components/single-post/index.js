@@ -5,6 +5,8 @@ import Register from "../register";
 import Login from "../login";
 import ForgetPassword from "../forget-password";
 import Single from "../../views/blog/single";
+import {connect} from "react-redux";
+import {fetchSinglePost} from "../../actions/posts-action-type";
 
 class SinglePost extends React.Component {
   state = {
@@ -30,11 +32,17 @@ class SinglePost extends React.Component {
 
   render() {
     const {registerPopUp, loginPopUp, forgetPasswordPopUp} = this.state;
+    const {isLoadingSinglePost, singlePostError, singlePostData} = this.props;
     return (
       <>
         <Header action={this.togglePopup} />
         <div className="container container-posts">
-          <Single />
+          <Single
+            singlePostData={singlePostData}
+            singlePostError={singlePostError}
+            isLoadingSinglePost={isLoadingSinglePost}
+            sidebar={true}
+          />
         </div>
         <Footer />
         {registerPopUp && (
@@ -55,4 +63,11 @@ class SinglePost extends React.Component {
   }
 }
 
-export default SinglePost;
+const mapStateToProps = ({
+  Posts: {isLoadingSinglePost, singlePostData, singlePostError},
+}) => ({
+  isLoadingSinglePost,
+  singlePostError,
+  singlePostData,
+});
+export default connect(mapStateToProps, {fetchSinglePost})(SinglePost);

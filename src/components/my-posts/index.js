@@ -1,19 +1,28 @@
 import React from "react";
-import Table from '../../views/table';
+import Table from "../../views/table";
+import {connect} from "react-redux";
+import {fetchUserPost} from "../../actions/posts-action-type";
 
-class MyProfile extends React.Component {
-
+class MyPosts extends React.Component {
   render() {
+    const {isLoadingUserPosts, postsUserError, postsUserData} = this.props;
     return (
       <>
         <div class="col-lg-9" data-aos="fade-left">
           <div class="row">
-              <Table title={"My Posts"}/>             
-            </div>            
+            <Table title={"My Posts"} />
+          </div>
         </div>
       </>
     );
   }
 }
 
-export default MyProfile;
+const mapStateToProps = ({
+  Posts: {isLoadingUserPosts, postsUserData, postsUserError},
+}) => ({
+  isLoadingUserPosts,
+  postsUserError,
+  postsUserData,
+});
+export default connect(mapStateToProps, {fetchUserPost})(MyPosts);
