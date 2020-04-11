@@ -1,9 +1,10 @@
 import React from "react";
 import InputField from "../../views/input-field";
 import ContainedButtons from "../../views/contained-buttons";
-import {connect} from "react-redux";
 import Card from "@material-ui/core/Card";
 import TextField from "@material-ui/core/TextField";
+import {connect} from "react-redux";
+import {addPost} from "../../actions/posts-action-type";
 
 class AddPost extends React.Component {
   state = {
@@ -46,11 +47,10 @@ class AddPost extends React.Component {
     }
 
     if (validation) {
-      // this.props.userSignUp({
-      //   email,
-      //   password,
-      //   user_image, bio, company_name, transaction_email, company_email, last_name, first_name
-      // });
+      this.props.addPost({
+        title,
+        description,
+      });
     } else {
       this.setState({fieldValidations: errorIn});
     }
@@ -58,7 +58,7 @@ class AddPost extends React.Component {
 
   render() {
     const {fieldValidations, description, bio} = this.state;
-
+    const {isLoadingAddPost, addPostError, addPostData} = this.props;
     return (
       <div class="col-lg-9" data-aos="fade-left">
         <div className="container-header">
@@ -89,6 +89,9 @@ class AddPost extends React.Component {
                 style={{width: "98%"}}
               />
             </div>
+            {addPostError && (
+              <div className="alert alert-danger">{addPostError}</div>
+            )}
             <div className="form-group user-profile-form-group-full">
               <ContainedButtons
                 title="Add"
@@ -102,4 +105,11 @@ class AddPost extends React.Component {
   }
 }
 
-export default AddPost;
+const mapStateToProps = ({
+  Posts: {isLoadingAddPost, addPostData, addPostError},
+}) => ({
+  isLoadingAddPost,
+  addPostError,
+  addPostData,
+});
+export default connect(mapStateToProps, {addPost})(AddPost);

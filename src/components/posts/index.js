@@ -5,6 +5,8 @@ import Register from "../../components/register";
 import Login from "../../components/login";
 import ForgetPassword from "../../components/forget-password";
 import Blog from "../../views/blog";
+import {fetchPost} from "../../actions/posts-action-type";
+import {connect} from "react-redux";
 
 class Posts extends React.Component {
   state = {
@@ -30,6 +32,7 @@ class Posts extends React.Component {
 
   render() {
     const {registerPopUp, loginPopUp, forgetPasswordPopUp} = this.state;
+    const {isLoadingPosts} = this.props;
     return (
       <>
         <Header action={this.togglePopup} />
@@ -55,4 +58,9 @@ class Posts extends React.Component {
   }
 }
 
-export default Posts;
+const mapStateToProps = ({Posts: {isLoadingPosts, postsData, postsError}}) => ({
+  isLoadingPosts,
+  postsError,
+  postsData,
+});
+export default connect(mapStateToProps, {fetchPost})(Posts);

@@ -3,7 +3,6 @@ import {makeStyles} from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import GitHubIcon from "@material-ui/icons/GitHub";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import Main from "./Main";
@@ -36,9 +35,9 @@ const sidebar = {
   ],
 };
 
-export default function Single() {
+export default function Single(props) {
   const classes = useStyles();
-
+  const {sidebar} = props;
   return (
     <React.Fragment>
       <CssBaseline />
@@ -46,12 +45,14 @@ export default function Single() {
         <main>
           <Grid container spacing={5} className={classes.mainGrid}>
             <Main posts={posts} />
-            <Sidebar
-              title={sidebar.title}
-              description={sidebar.description}
-              archives={sidebar.archives}
-              social={sidebar.social}
-            />
+            {sidebar && (
+              <Sidebar
+                title={sidebar.title}
+                description={sidebar.description}
+                archives={sidebar.archives}
+                social={sidebar.social}
+              />
+            )}
           </Grid>
         </main>
       </Container>

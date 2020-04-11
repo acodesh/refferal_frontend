@@ -8,6 +8,7 @@ import MyPayment from "../components/my-payment";
 import MyReferrals from "../components/my-referrals";
 import Posts from "../components/posts";
 import SinglePost from "../components/single-post";
+import SingleUserPost from "../components/single-user-post";
 import AddPost from "../components/add-post";
 const Paths = [
   {
@@ -71,6 +72,12 @@ const Paths = [
             exact: true,
             path: "/add-post",
             title: "AddPost",
+          },
+          {
+            component: SingleUserPost,
+            exact: true,
+            path: "/post/:id",
+            title: "Post",
           },
         ],
         urlPrefix: "/user",
