@@ -1,4 +1,4 @@
-import { createAction } from "redux-actions";
+import {createAction} from "redux-actions";
 
 export const LOGIN_USER = "LOGIN_USER";
 export const loginUser = createAction(LOGIN_USER);
@@ -35,3 +35,15 @@ export const forgetPasswordSuccess = createAction(FORGET_PASSWORD_SUCCESS);
 
 export const FORGET_PASSWORD_FAILURE = "FORGET_PASSWORD_FAILURE";
 export const forgetPasswordFailure = createAction(FORGET_PASSWORD_FAILURE);
+
+export const LOGOUT_ACTION = "LOGOUT_ACTION";
+export const logoutAction = createAction(LOGOUT_ACTION);
+
+// export const LOGOUT_ACTION_REQUEST = "LOGOUT_ACTION_REQUEST";
+// export const logoutActionRequest = createAction(LOGOUT_ACTION_REQUEST);
+
+export const LOGOUT_ACTION_SUCCESS = "LOGOUT_ACTION_SUCCESS";
+export const logoutActionSuccess = createAction(LOGOUT_ACTION_SUCCESS);
+
+// export const LOGOUT_ACTION_FAILURE = "LOGOUT_ACTION_FAILURE";
+// export const logoutActionFailure = createAction(FORGET_PASSWORD_FAILURE);
