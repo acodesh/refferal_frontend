@@ -1,0 +1,32 @@
+name: Deploying to live
+on:
+  push:
+    branches:
+      - develop
+
+env:
+  LIVE_SERVER_PASSWORD: ${{ secrets.LIVE_SERVER_PASSWORD }}
+  LIVE_SERVER_USERNAME: ${{ secrets.LIVE_SERVER_USERNAME }}
+  LIVE_SERVER_HOST: ${{ secrets.LIVE_SERVER_HOST }}
+  LIVE_SERVER_PATH: ${{ secrets.LIVE_SERVER_PATH }}
+
+jobs:
+  Live-deploy:
+    name: Live-deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Install Dependency and Deploy on Live Server
+      if: github.ref == 'refs/heads/develop'
+      run: |
+        sudo apt-get install sshpass
+        sudo apt-get install -y rsync
+        sshpass -p "$LIVE_SERVER_PASSWORD" rsync -O --exclude='.git/' --exclude='.gitlab-ci.yml' --exclude='.github/' -rav -e 'ssh -o StrictHostKeyChecking=no -p 22' .  $LIVE_SERVER_USERNAME@$LIVE_SERVER_HOST:$LIVE_SERVER_PATH
+    - name: Migrate the Database
+      run: |
+        chmod +x ./ops/installapp.sh
+        sed -i "s|<SERVER_PATH>|$LIVE_SERVER_PATH|g" ./ops/installapp.sh
+        sshpass -p "$LIVE_SERVER_PASSWORD" ssh $LIVE_SERVER_USERNAME@$LIVE_SERVER_HOST PROJECT_PATH="$LIVE_SERVER_PATH" 'bash' < ./ops/installapp.sh
