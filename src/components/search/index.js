@@ -4,11 +4,12 @@ import Footer from "../../views/footer";
 import Register from "../../components/register";
 import Login from "../../components/login";
 import ForgetPassword from "../../components/forget-password";
-import Blog from "../../views/blog";
-import {fetchPost} from "../../actions/posts-action-type";
+import SearchUser from "../../views/blog/search-user";
+import {searchAction} from "../../actions/search-action-type";
 import {connect} from "react-redux";
+import {withRouter} from "react-router";
 
-class Posts extends React.Component {
+class Search extends React.Component {
   state = {
     registerPopUp: false,
     loginPopUp: false,
@@ -31,23 +32,23 @@ class Posts extends React.Component {
   };
 
   componentDidMount = () => {
-    this.props.fetchPost();
+    const {search} = this.props.match.params;
+
+    this.props.searchAction(search);
   };
 
   render() {
     const {registerPopUp, loginPopUp, forgetPasswordPopUp} = this.state;
-    const {isLoadingPosts, postsData} = this.props;
-
+    const {isLoadingSearch, searchdData, searchError} = this.props;
+    const {search} = this.props.match.params;
     return (
       <>
         <Header action={this.togglePopup} />
         <div className="container container-posts">
-          <Blog
-            data={postsData}
-            isLoading={isLoadingPosts}
-            title={"Most Recent Posts"}
-            isFeaturePost={true}
-            isFeaturePosts={true}
+          <SearchUser
+            data={searchdData}
+            isLoading={isLoadingSearch}
+            title={search ? `Search: ${search}` : "Top-rated Professionals"}
           />
         </div>
         <Footer />
@@ -69,9 +70,11 @@ class Posts extends React.Component {
   }
 }
 
-const mapStateToProps = ({Posts: {isLoadingPosts, postsData, postsError}}) => ({
-  isLoadingPosts,
-  postsError,
-  postsData,
+const mapStateToProps = ({
+  Search: {isLoadingSearch, searchdData, searchError},
+}) => ({
+  isLoadingSearch,
+  searchError,
+  searchdData,
 });
-export default connect(mapStateToProps, {fetchPost})(Posts);
+export default withRouter(connect(mapStateToProps, {searchAction})(Search));

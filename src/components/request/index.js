@@ -4,11 +4,11 @@ import Footer from "../../views/footer";
 import Register from "../../components/register";
 import Login from "../../components/login";
 import ForgetPassword from "../../components/forget-password";
-import Blog from "../../views/blog";
-import {fetchPost} from "../../actions/posts-action-type";
-import {connect} from "react-redux";
+import RequestPost from "../../views/blog/request-post";
 
-class Posts extends React.Component {
+import {withRouter} from "react-router";
+
+class Request extends React.Component {
   state = {
     registerPopUp: false,
     loginPopUp: false,
@@ -30,25 +30,14 @@ class Posts extends React.Component {
     this.setState({loginPopUp: true, registerPopUp: false});
   };
 
-  componentDidMount = () => {
-    this.props.fetchPost();
-  };
-
   render() {
     const {registerPopUp, loginPopUp, forgetPasswordPopUp} = this.state;
-    const {isLoadingPosts, postsData} = this.props;
-
+    const {user_id} = this.props.match.params;
     return (
       <>
         <Header action={this.togglePopup} />
         <div className="container container-posts">
-          <Blog
-            data={postsData}
-            isLoading={isLoadingPosts}
-            title={"Most Recent Posts"}
-            isFeaturePost={true}
-            isFeaturePosts={true}
-          />
+          <RequestPost user_id={user_id} />
         </div>
         <Footer />
         {registerPopUp && (
@@ -69,9 +58,4 @@ class Posts extends React.Component {
   }
 }
 
-const mapStateToProps = ({Posts: {isLoadingPosts, postsData, postsError}}) => ({
-  isLoadingPosts,
-  postsError,
-  postsData,
-});
-export default connect(mapStateToProps, {fetchPost})(Posts);
+export default withRouter(Request);
