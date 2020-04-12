@@ -13,6 +13,7 @@ import Sidebar from "./Sidebar";
 import post1 from "./blog-post.1.md";
 import post2 from "./blog-post.2.md";
 import post3 from "./blog-post.3.md";
+import Loader from "../loader";
 
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
@@ -66,9 +67,10 @@ const sidebar = {
   ],
 };
 
-export default function Blog() {
+export default function Blog(props) {
   const classes = useStyles();
 
+  const {isLoading} = props;
   return (
     <React.Fragment>
       <CssBaseline />
@@ -81,7 +83,14 @@ export default function Blog() {
             ))}
           </Grid>
           <Grid container spacing={5} className={classes.mainGrid}>
-            <Main title="Most Recent Posts" posts={posts} />
+            {isLoading ? (
+              <div className="single-post-loader">
+                <Loader />
+              </div>
+            ) : (
+              <Main title="Most Recent Posts" posts={posts} />
+            )}
+
             <Sidebar
               title={sidebar.title}
               description={sidebar.description}

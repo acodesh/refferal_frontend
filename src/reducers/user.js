@@ -9,17 +9,27 @@ import {
   FORGET_PASSWORD_REQUEST,
   FORGET_PASSWORD_FAILURE,
   LOGOUT_ACTION_SUCCESS,
+  FETCH_USER_DETAIL_SUCCESS,
+  FETCH_USER_DETAIL_REQUEST,
+  FETCH_USER_DETAIL_FAILURE,
+  UPDATE_USER_DATA_SUCCESS,
+  UPDATE_USER_DATA_REQUEST,
+  UPDATE_USER_DATA_FAILURE,
 } from "../actions/user-action-type";
 
 const initialState = {
   userLoginError: "",
   isLoadingUserLogin: false,
-  user: [],
+  user: {},
   isLoadingUserSignUp: false,
   userSignUpError: "",
+  userSignUpSuccess: false,
   isLoadingForgetPassword: false,
   forgetPasswordError: "",
   forgetPasswordStatus: false,
+  isLoadingUserDetails: false,
+  userError: "",
+  userData: {},
 };
 
 const User = (state = initialState, {type, payload}) => {
@@ -34,7 +44,7 @@ const User = (state = initialState, {type, payload}) => {
     case LOGIN_USER_SUCCESS:
       return {
         ...state,
-        user: payload.data.response,
+        user: payload.response,
         isLoadingUserLogin: false,
         userLoginError: "",
       };
@@ -42,9 +52,9 @@ const User = (state = initialState, {type, payload}) => {
     case LOGIN_USER_FAILURE:
       return {
         ...state,
-        user: [],
+        user: {},
         isLoadingUserLogin: false,
-        userLoginError: payload.error,
+        userLoginError: payload,
       };
 
     case SIGN_UP_USER_REQUEST:
@@ -52,6 +62,7 @@ const User = (state = initialState, {type, payload}) => {
         ...state,
         isLoadingUserSignUp: true,
         userSignUpError: "",
+        userSignUpSuccess: false,
       };
 
     case SIGN_UP_USER_SUCCESS:
@@ -59,6 +70,7 @@ const User = (state = initialState, {type, payload}) => {
         ...state,
         isLoadingUserSignUp: false,
         userSignUpError: "",
+        userSignUpSuccess: true,
       };
 
     case SIGN_UP_USER_FAILURE:
@@ -66,6 +78,7 @@ const User = (state = initialState, {type, payload}) => {
         ...state,
         isLoadingUserSignUp: false,
         userSignUpError: payload.error,
+        userSignUpSuccess: false,
       };
 
     case FORGET_PASSWORD_REQUEST:
@@ -80,7 +93,7 @@ const User = (state = initialState, {type, payload}) => {
         ...state,
         isLoadingForgetPassword: false,
         forgetPasswordError: "",
-        forgetPasswordStatus: payload.data.status,
+        forgetPasswordStatus: payload.status,
       };
 
     case FORGET_PASSWORD_FAILURE:
@@ -90,10 +103,57 @@ const User = (state = initialState, {type, payload}) => {
         forgetPasswordError: payload.error,
       };
 
+    case FETCH_USER_DETAIL_REQUEST:
+      return {
+        ...state,
+        isLoadingUserDetails: true,
+        userError: "",
+      };
+
+    case FETCH_USER_DETAIL_SUCCESS:
+      return {
+        ...state,
+        isLoadingUserDetails: false,
+        userError: "",
+        userData: payload.response,
+      };
+
+    case FETCH_USER_DETAIL_FAILURE:
+      return {
+        ...state,
+        isLoadingUserDetails: false,
+        userError: payload.error,
+        userData: {},
+      };
+
+    case UPDATE_USER_DATA_REQUEST:
+      return {
+        ...state,
+        isLoadingUpdateUser: true,
+        updateError: "",
+        updateSuccess: "",
+      };
+
+    case UPDATE_USER_DATA_SUCCESS:
+      return {
+        ...state,
+        isLoadingUpdateUser: false,
+        updateError: "",
+        updateSuccess: "Details updated successfully.",
+      };
+
+    case UPDATE_USER_DATA_FAILURE:
+      return {
+        ...state,
+        isLoadingUpdateUser: false,
+        updateError: payload.error,
+        updateSuccess: "",
+      };
+
     case LOGOUT_ACTION_SUCCESS:
       return {
         ...state,
-        user: [],
+        user: {},
       };
 
     default:

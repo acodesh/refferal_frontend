@@ -30,6 +30,9 @@ class SinglePost extends React.Component {
     this.setState({loginPopUp: true, registerPopUp: false});
   };
 
+  componentDidMount = () => {
+    this.props.fetchSinglePost();
+  };
   render() {
     const {registerPopUp, loginPopUp, forgetPasswordPopUp} = this.state;
     const {isLoadingSinglePost, singlePostError, singlePostData} = this.props;
@@ -38,10 +41,10 @@ class SinglePost extends React.Component {
         <Header action={this.togglePopup} />
         <div className="container container-posts">
           <Single
-            singlePostData={singlePostData}
-            singlePostError={singlePostError}
-            isLoadingSinglePost={isLoadingSinglePost}
-            sidebar={true}
+            postData={singlePostData}
+            error={singlePostError}
+            isLoading={isLoadingSinglePost}
+            sidebarDisplay={true}
           />
         </div>
         <Footer />

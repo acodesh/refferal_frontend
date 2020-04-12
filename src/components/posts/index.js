@@ -30,14 +30,19 @@ class Posts extends React.Component {
     this.setState({loginPopUp: true, registerPopUp: false});
   };
 
+  componentDidMount = () => {
+    this.props.fetchPost();
+  };
+
   render() {
     const {registerPopUp, loginPopUp, forgetPasswordPopUp} = this.state;
-    const {isLoadingPosts} = this.props;
+    const {isLoadingPosts, postsData} = this.props;
+
     return (
       <>
         <Header action={this.togglePopup} />
         <div className="container container-posts">
-          <Blog />
+          <Blog data={postsData} isLoading={isLoadingPosts} />
         </div>
         <Footer />
         {registerPopUp && (

@@ -1789,6 +1789,9 @@ section {
 .container-posts {
   padding-top: 100px;
   padding-bottom: 20px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 .landing-card {
   padding-left: 30px;
@@ -1811,4 +1814,17 @@ ul {
 }
 .container-header h3 {
   padding-top: 7px;
+}
+.single-post-loader {
+  width: 65%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.my-posts-user-loader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 350px;
 }

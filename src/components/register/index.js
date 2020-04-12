@@ -10,40 +10,40 @@ class Register extends React.Component {
     password: "",
     first_name: "",
     last_name: "",
-    company_email:"",
-    transaction_email:"",
-    company_name:"",
-    bio:"",
+    company_email: "",
+    transaction_email: "",
+    company_name: "",
+    bio: "",
     user_image: "",
     fieldValidations: {
       email: false,
       password: false,
       first_name: false,
       last_name: false,
-      company_email:false,
-      transaction_email:false,
-      company_name:false,
-      bio:false,
+      company_email: false,
+      transaction_email: false,
+      company_name: false,
+      bio: false,
       user_image: false,
-    }
+    },
   };
   handleChange = (field, e) => {
     const {target} = e;
     const {fieldValidations} = this.state;
     if (
       (field === "email" && !fieldValidations.email) ||
-      (field === "password" && !fieldValidations.password)||
-      (field === "first_name" && !fieldValidations.first_name)||
-      (field === "last_name" && !fieldValidations.last_name)||
-      (field === "company_email" && !fieldValidations.company_email)||
-      (field === "transaction_email" && !fieldValidations.transaction_email)||
-      (field === "company_name" && !fieldValidations.company_name)||
-      (field === "bio" && !fieldValidations.bio)||
+      (field === "password" && !fieldValidations.password) ||
+      (field === "first_name" && !fieldValidations.first_name) ||
+      (field === "last_name" && !fieldValidations.last_name) ||
+      (field === "company_email" && !fieldValidations.company_email) ||
+      (field === "transaction_email" && !fieldValidations.transaction_email) ||
+      (field === "company_name" && !fieldValidations.company_name) ||
+      (field === "bio" && !fieldValidations.bio) ||
       (field === "user_image" && !fieldValidations.user_image)
     ) {
       this.setState({
         [field]: target.value,
-        fieldValidations: {[field]: false}
+        fieldValidations: {[field]: false},
       });
     } else {
       this.setState({[field]: target.value});
@@ -51,7 +51,17 @@ class Register extends React.Component {
   };
 
   handleSubmitonClick = () => {
-    const {email, password, user_image, bio, company_name, transaction_email, company_email, last_name, first_name} = this.state;
+    const {
+      email,
+      password,
+      user_image,
+      bio,
+      company_name,
+      transaction_email,
+      company_email,
+      last_name,
+      first_name,
+    } = this.state;
 
     let validation = true;
     let errorIn;
@@ -68,7 +78,13 @@ class Register extends React.Component {
       this.props.userSignUp({
         email,
         password,
-        user_image, bio, company_name, transaction_email, company_email, last_name, first_name
+        user_image,
+        bio,
+        company_name,
+        transaction_email,
+        company_email,
+        last_name,
+        first_name,
       });
     } else {
       this.setState({fieldValidations: errorIn});
@@ -76,8 +92,24 @@ class Register extends React.Component {
   };
 
   render() {
-    const {action, manageLogin, userSignUpError} = this.props;
-    const {email, password, fieldValidations, user_image, bio, company_name, transaction_email, company_email, last_name, first_name} = this.state;
+    const {
+      action,
+      manageLogin,
+      userSignUpError,
+      userSignUpSuccess,
+    } = this.props;
+    const {
+      email,
+      password,
+      fieldValidations,
+      user_image,
+      bio,
+      company_name,
+      transaction_email,
+      company_email,
+      last_name,
+      first_name,
+    } = this.state;
     return (
       <>
         <div id="signupModel" className="modal fade">
@@ -96,15 +128,18 @@ class Register extends React.Component {
                     &times;
                   </button>
                 </div>
-                <div className="modal-body" style={{height: '400px',overflow: 'scroll'}}>
-                <div className="form-group" style={{display: 'flex'}}>
+                <div
+                  className="modal-body"
+                  style={{height: "400px", overflow: "scroll"}}
+                >
+                  <div className="form-group" style={{display: "flex"}}>
                     <InputField
                       label={"First Name"}
                       name="first_name"
                       value={first_name}
                       error={fieldValidations.first_name}
                       handleChange={this.handleChange.bind(this, "first_name")}
-                      style={{width: '48%'}}
+                      style={{width: "48%"}}
                     />
                     <InputField
                       label={"Last Name"}
@@ -112,17 +147,17 @@ class Register extends React.Component {
                       value={last_name}
                       error={fieldValidations.last_name}
                       handleChange={this.handleChange.bind(this, "last_name")}
-                      style={{width: '48%'}}
+                      style={{width: "48%"}}
                     />
-                  </div> 
-                  <div className="form-group" style={{display: 'flex'}}>
+                  </div>
+                  <div className="form-group" style={{display: "flex"}}>
                     <InputField
                       label={"Email"}
                       name="email"
                       value={email}
                       error={fieldValidations.email}
                       handleChange={this.handleChange.bind(this, "email")}
-                      style={{width: '48%'}}
+                      style={{width: "48%"}}
                     />
 
                     <InputField
@@ -131,26 +166,32 @@ class Register extends React.Component {
                       value={password}
                       error={fieldValidations.password}
                       handleChange={this.handleChange.bind(this, "password")}
-                      style={{width: '48%'}}
-                      type={'password'}
+                      style={{width: "48%"}}
+                      type={"password"}
                     />
                   </div>
-                  <div className="form-group" style={{display: 'flex'}}>
+                  <div className="form-group" style={{display: "flex"}}>
                     <InputField
                       label={"Transaction Email"}
                       name="transaction_email"
                       value={transaction_email}
                       error={fieldValidations.transaction_email}
-                      handleChange={this.handleChange.bind(this, "transaction_email")}
-                      style={{width: '48%'}}
+                      handleChange={this.handleChange.bind(
+                        this,
+                        "transaction_email"
+                      )}
+                      style={{width: "48%"}}
                     />
                     <InputField
                       label={"Company Email"}
                       name="company_email"
                       value={company_email}
                       error={fieldValidations.company_email}
-                      handleChange={this.handleChange.bind(this, "company_email")}
-                      style={{width: '48%'}}
+                      handleChange={this.handleChange.bind(
+                        this,
+                        "company_email"
+                      )}
+                      style={{width: "48%"}}
                     />
                   </div>
                   <div className="form-group">
@@ -159,7 +200,10 @@ class Register extends React.Component {
                       name="company_name"
                       value={company_name}
                       error={fieldValidations.company_name}
-                      handleChange={this.handleChange.bind(this, "company_name")}
+                      handleChange={this.handleChange.bind(
+                        this,
+                        "company_name"
+                      )}
                     />
                   </div>
                   <div className="form-group">
@@ -183,17 +227,34 @@ class Register extends React.Component {
                   </div>
                 </div>
                 <div className="modal-footer">
-                
-                {userSignUpError && <div className="alert alert-danger">{userSignUpError}</div>}
-                <div>
-                  <ContainedButtons
-                    title="Register"
-                    onClick={() => this.handleSubmitonClick()}
-                  />
+                  {userSignUpError && (
+                    <div className="alert alert-danger">{userSignUpError}</div>
+                  )}
+                  {userSignUpSuccess && (
+                    <div className="alert alert-success">
+                      You have successfully registered.{" "}
+                      <a
+                        href="#"
+                        className="pull-right text-muted"
+                        onClick={(e) => manageLogin(e)}
+                      >
+                        Click here to login.
+                      </a>{" "}
+                    </div>
+                  )}
+                  <div>
+                    <ContainedButtons
+                      title="Register"
+                      onClick={() => this.handleSubmitonClick()}
+                    />
                   </div>
                   <div>
                     Already have account?{" "}
-                    <a href="#" className="pull-right text-muted" onClick={(e) => manageLogin(e)}>
+                    <a
+                      href="#"
+                      className="pull-right text-muted"
+                      onClick={(e) => manageLogin(e)}
+                    >
                       <small>Login</small>
                     </a>
                   </div>
@@ -207,5 +268,7 @@ class Register extends React.Component {
     );
   }
 }
-const mapStateToProps = ({User: {userSignUpError, isLoadingUserSignUp}}) => ({userSignUpError, isLoadingUserSignUp});
+const mapStateToProps = ({
+  User: {userSignUpError, isLoadingUserSignUp, userSignUpSuccess},
+}) => ({userSignUpError, isLoadingUserSignUp, userSignUpSuccess});
 export default connect(mapStateToProps, {userSignUp})(Register);

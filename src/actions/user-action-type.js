@@ -47,3 +47,27 @@ export const logoutActionSuccess = createAction(LOGOUT_ACTION_SUCCESS);
 
 // export const LOGOUT_ACTION_FAILURE = "LOGOUT_ACTION_FAILURE";
 // export const logoutActionFailure = createAction(FORGET_PASSWORD_FAILURE);
+
+export const FETCH_USER_DETAIL = "FETCH_USER_DETAIL";
+export const getUserDetails = createAction(FETCH_USER_DETAIL);
+
+export const FETCH_USER_DETAIL_REQUEST = "FETCH_USER_DETAIL_REQUEST";
+export const getUserDetailsRequest = createAction(FETCH_USER_DETAIL_REQUEST);
+
+export const FETCH_USER_DETAIL_SUCCESS = "FETCH_USER_DETAIL_SUCCESS";
+export const getUserDetailsSuccess = createAction(FETCH_USER_DETAIL_SUCCESS);
+
+export const FETCH_USER_DETAIL_FAILURE = "FETCH_USER_DETAIL_FAILURE";
+export const getUserDetailsFailure = createAction(FETCH_USER_DETAIL_FAILURE);
+
+export const UPDATE_USER_DATA = "UPDATE_USER_DATA";
+export const updateUserData = createAction(UPDATE_USER_DATA);
+
+export const UPDATE_USER_DATA_REQUEST = "UPDATE_USER_DATA_REQUEST";
+export const updateUserDataRequest = createAction(UPDATE_USER_DATA_REQUEST);
+
+export const UPDATE_USER_DATA_SUCCESS = "UPDATE_USER_DATA_SUCCESS";
+export const updateUserDataSuccess = createAction(UPDATE_USER_DATA_SUCCESS);
+
+export const UPDATE_USER_DATA_FAILURE = "UPDATE_USER_DATA_FAILURE";
+export const updateUserDataFailure = createAction(UPDATE_USER_DATA_FAILURE);
