@@ -23,14 +23,17 @@ import {
 } from "../actions/posts-action-type";
 import Utils from "../utils";
 import CONSTANTS from "../constants";
+import User from "../utils/user";
 
 const {
   httpHelper: {getRequest, postRequest},
 } = new Utils().getAll();
 
+const {getAccessToken} = new User();
+
 export function* getPosts() {
   const payload = {
-    url: `${CONSTANTS.CONTACT_SERVICE_URL}/posts`,
+    url: `${CONSTANTS.CONTACT_SERVICE_URL}/posts/postListing`,
   };
 
   yield put(fetchPostRequest());
@@ -45,7 +48,9 @@ export function* getPosts() {
 }
 
 export function* getUserPosts() {
+  const accessToken = getAccessToken();
   const payload = {
+    Authorization: `Bearer ${accessToken}`,
     url: `${CONSTANTS.CONTACT_SERVICE_URL}/user/posts`,
   };
 
@@ -77,7 +82,9 @@ export function* getSinglePost(id) {
 }
 
 export function* getSingleUserPost(id) {
+  const accessToken = getAccessToken();
   const payload = {
+    Authorization: `Bearer ${accessToken}`,
     url: `${CONSTANTS.CONTACT_SERVICE_URL}/user/post/${id}`,
   };
 
@@ -93,18 +100,20 @@ export function* getSingleUserPost(id) {
 }
 
 export function* addNewPost({payload: postData}) {
+  const accessToken = getAccessToken();
   var bodyFormData = new FormData();
   bodyFormData.set("title", postData.title);
   bodyFormData.set("description", postData.description);
   const payload = {
     headers: {
+      Authorization: `Bearer ${accessToken}`,
       "Access-Control-Request-Headers": "Content-Type, Authorization",
       "Content-Type": "multipart/form-data",
       "Access-Control-Allow-Origin": "*",
       Accept: "text/json",
     },
     data: bodyFormData,
-    url: `${CONSTANTS.CONTACT_SERVICE_URL}/post/add`,
+    url: `${CONSTANTS.CONTACT_SERVICE_URL}/posts/createPost`,
   };
 
   yield put(addPostRequest());

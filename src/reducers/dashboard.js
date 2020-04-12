@@ -22,7 +22,7 @@ const Dashboard = (state = initialState, {type, payload}) => {
     case FETCH_USER_DASHBOARD_SUCCESS:
       return {
         ...state,
-        dashboardData: payload.data.response,
+        dashboardData: payload.response,
         isLoadingDashboard: false,
         dashboardError: "",
       };

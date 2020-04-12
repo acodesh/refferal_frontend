@@ -7,13 +7,18 @@ import {
 } from "../actions/user-dashboard-action-type";
 import Utils from "../utils";
 import CONSTANTS from "../constants";
+import User from "../utils/user";
 
 const {
   httpHelper: {getRequest, postRequest},
 } = new Utils().getAll();
 
+const {getAccessToken} = new User();
+
 function* fetchDashboardDetails() {
+  const accessToken = getAccessToken();
   const payload = {
+    Authorization: `Bearer ${accessToken}`,
     url: `${CONSTANTS.CONTACT_SERVICE_URL}/users/dashboard`,
   };
 

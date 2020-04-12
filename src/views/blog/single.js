@@ -10,6 +10,7 @@ import Sidebar from "./Sidebar";
 import post1 from "./blog-post.1.md";
 import post2 from "./blog-post.2.md";
 import post3 from "./blog-post.3.md";
+import Loader from "../loader";
 
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
@@ -37,15 +38,21 @@ const sidebar = {
 
 export default function Single(props) {
   const classes = useStyles();
-  const {sidebar} = props;
+  const {sidebarDisplay, postData, error, isLoading} = props;
   return (
     <React.Fragment>
       <CssBaseline />
       <Container maxWidth="lg">
         <main>
           <Grid container spacing={5} className={classes.mainGrid}>
-            <Main posts={posts} />
-            {sidebar && (
+            {isLoading ? (
+              <div className="single-post-loader">
+                <Loader />
+              </div>
+            ) : (
+              <Main posts={posts} />
+            )}
+            {sidebarDisplay && (
               <Sidebar
                 title={sidebar.title}
                 description={sidebar.description}

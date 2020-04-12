@@ -18,19 +18,19 @@ import {
 
 const initialState = {
   isLoadingPosts: false,
-  postsData: [],
+  postsData: {},
   postsError: "",
   isLoadingUserPosts: false,
-  postsUserData: [],
+  postsUserData: {},
   postsUserError: "",
   isLoadingSinglePost: false,
-  singlePostData: [],
+  singlePostData: {},
   singlePostError: "",
   isLoadingSingleUserPost: false,
-  singleUserPostData: [],
+  singleUserPostData: {},
   singleUserPostError: "",
   isLoadingAddPost: false,
-  addPostData: [],
+  addPostData: {},
   addPostError: "",
 };
 
@@ -54,7 +54,7 @@ const Posts = (state = initialState, {type, payload}) => {
     case FETCH_POST_FAILURE:
       return {
         ...state,
-        postsData: [],
+        postsData: {},
         isLoadingPosts: false,
         postsError: payload.error,
       };
@@ -77,7 +77,7 @@ const Posts = (state = initialState, {type, payload}) => {
     case FETCH_USER_POST_FAILURE:
       return {
         ...state,
-        postsUserData: [],
+        postsUserData: {},
         isLoadingUserPosts: false,
         postsUserError: payload.error,
       };
@@ -100,7 +100,7 @@ const Posts = (state = initialState, {type, payload}) => {
     case FETCH_SINGLE_POST_FAILURE:
       return {
         ...state,
-        singlePostData: [],
+        singlePostData: {},
         isLoadingSinglePost: false,
         singlePostError: payload.error,
       };
@@ -123,7 +123,7 @@ const Posts = (state = initialState, {type, payload}) => {
     case FETCH_SINGLE_USER_POST_FAILURE:
       return {
         ...state,
-        singleUserPostData: [],
+        singleUserPostData: {},
         isLoadingSingleUserPost: false,
         singleUserPostError: payload.error,
       };
@@ -146,7 +146,7 @@ const Posts = (state = initialState, {type, payload}) => {
     case ADD_POST_FAILURE:
       return {
         ...state,
-        addPostData: [],
+        addPostData: {},
         isLoadingAddPost: false,
         addPostError: payload.error,
       };

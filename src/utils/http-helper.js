@@ -1,22 +1,21 @@
-import axios from 'axios';
+import axios from "axios";
 
 class HttpHelper {
-   sendRequest = async (args) => {
-     try {
-       const response = await axios(args);
+  sendRequest = async (args) => {
+    try {
+      const response = await axios(args);
 
-       return response;
-     } catch (error) {
-       return { error };
-     }
-   }
+      return response;
+    } catch (error) {
+      return {error};
+    }
+  };
 
   getRequest = async (args) => {
-    const {
-      data,
-      error,
-      status,
-    } = await this.sendRequest({ ...args, method: 'get' });
+    const {data, error, status} = await this.sendRequest({
+      ...args,
+      method: "get",
+    });
 
     if (status === 200) {
       return {
@@ -31,16 +30,15 @@ class HttpHelper {
       error: error || data,
       status,
     };
-  }
+  };
 
   postRequest = async (args) => {
-    const {
-      data,
-      error,
-      status,
-    } = await this.sendRequest({ ...args, method: 'post' });
+    const {data, error, status} = await this.sendRequest({
+      ...args,
+      method: "post",
+    });
 
-    if ([ 200, 201, 204 ].indexOf(status) > -1) {
+    if ([200, 201, 204].indexOf(status) > -1) {
       return {
         data,
         error: null,
@@ -49,11 +47,10 @@ class HttpHelper {
     }
     return {
       data: null,
-      error: error || data.response.message,
+      error: error,
       status,
     };
-  }
-  
+  };
 }
 
 export default HttpHelper;
