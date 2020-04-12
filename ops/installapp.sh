@@ -5,7 +5,7 @@ source ~/.nvm/nvm.sh
 
 # go to the directory
 echo "Going to directory"
-cd <LIVE_SERVER_PATH>
+cd /var/www/html/AdizFront
 
 echo "Removing the server"
 rm -rf node_modules
