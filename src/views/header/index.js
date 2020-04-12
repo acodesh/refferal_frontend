@@ -4,6 +4,7 @@ import Link from "@material-ui/core/Link";
 import {connect} from "react-redux";
 import {logoutAction} from "../../actions/user-action-type";
 import Storage from "../../utils/storage";
+import SearchField from "../search-field";
 
 const userDetails = Storage.get("userDetails");
 let activeUserId = userDetails.userId;
@@ -31,62 +32,65 @@ class Header extends React.Component {
                 </a>
               </h1>
             </div>
-            {activeUserId ? (
-              <nav class="nav-menu d-none d-lg-block">
-                <ul>
-                  <li>
-                    <Link variant="subtitle1" href="/user/my-profile">
-                      My Account
-                    </Link>
-                  </li>
-                  <li>
-                    <Link variant="subtitle1" href="/posts">
-                      Posts
-                    </Link>
-                  </li>
-                  <li>
-                    <a
-                      onClick={(e) => this.handelLogoutClick(e)}
-                      className="trigger-btn"
-                      data-toggle="modal"
-                      href=""
-                    >
-                      Logout
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            ) : (
-              <nav className="nav-menu d-none d-lg-block">
-                <ul>
-                  <li>
-                    <a
-                      onClick={(e) => action(e, "registerPopUp")}
-                      className="trigger-btn"
-                      data-toggle="modal"
-                      href=""
-                    >
-                      Join
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      onClick={(e) => action(e, "loginPopUp")}
-                      className="trigger-btn"
-                      data-toggle="modal"
-                      href=""
-                    >
-                      Login
-                    </a>
-                  </li>
-                  <li>
-                    <Link variant="subtitle1" href="/posts">
-                      Post
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
-            )}
+            <nav className="nav-menu d-none d-lg-block">
+              <ul>
+                <li>
+                  <SearchField />
+                </li>
+                {activeUserId ? (
+                  <>
+                    <li>
+                      <Link variant="subtitle1" href="/user/my-profile">
+                        My Account
+                      </Link>
+                    </li>
+                    <li>
+                      <Link variant="subtitle1" href="/posts">
+                        Posts
+                      </Link>
+                    </li>
+                    <li>
+                      <a
+                        onClick={(e) => this.handelLogoutClick(e)}
+                        className="trigger-btn"
+                        data-toggle="modal"
+                        href=""
+                      >
+                        Logout
+                      </a>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <a
+                        onClick={(e) => action(e, "registerPopUp")}
+                        className="trigger-btn"
+                        data-toggle="modal"
+                        href=""
+                      >
+                        Join
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        onClick={(e) => action(e, "loginPopUp")}
+                        className="trigger-btn"
+                        data-toggle="modal"
+                        href=""
+                      >
+                        Login
+                      </a>
+                    </li>
+                    <li>
+                      <Link variant="subtitle1" href="/posts">
+                        Post
+                      </Link>
+                    </li>
+                  </>
+                )}
+              </ul>
+            </nav>
           </div>
         </header>
       </>

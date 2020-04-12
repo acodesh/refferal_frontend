@@ -10,6 +10,8 @@ import Posts from "../components/posts";
 import SinglePost from "../components/single-post";
 import SingleUserPost from "../components/single-user-post";
 import AddPost from "../components/add-post";
+import Search from "../components/search";
+import Request from "../components/request";
 const Paths = [
   {
     component: Landing,
@@ -24,10 +26,22 @@ const Paths = [
     title: "Posts",
   },
   {
+    component: Search,
+    exact: true,
+    path: "/search/:search",
+    title: "Search",
+  },
+  {
     component: SinglePost,
     exact: true,
     path: "/post/:id",
     title: "Single Post",
+  },
+  {
+    component: Request,
+    exact: true,
+    path: "/request/:user_id",
+    title: "Request",
   },
   {
     component: AccessControlRoutes,
