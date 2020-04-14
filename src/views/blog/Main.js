@@ -5,6 +5,8 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Markdown from "./Markdown";
+import Avatar from "@material-ui/core/Avatar";
+import CardHeader from "@material-ui/core/CardHeader";
 
 const useStyles = makeStyles((theme) => ({
   markdown: {
@@ -15,19 +17,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Main(props) {
   const classes = useStyles();
-  const {posts, title} = props;
-  console.log(props, "props");
+  const {post} = props;
+
   return (
     <Grid item xs={12} md={8}>
-      <Typography variant="h6" gutterBottom>
-        {title}
-      </Typography>
+      <CardHeader
+        avatar={
+          <Avatar aria-label="recipe" className={classes.avatar}>
+            R
+          </Avatar>
+        }
+        title={post.title}
+        subheader={post.createdAt}
+      />
       <Divider />
-      {posts.map((post) => (
-        <Markdown className={classes.markdown} key={post.substring(0, 40)}>
-          {post}
-        </Markdown>
-      ))}
+
+      {post.description}
     </Grid>
   );
 }

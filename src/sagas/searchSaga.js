@@ -15,7 +15,7 @@ const {
 
 function* searchUser() {
   const payload = {
-    url: `${CONSTANTS.CONTACT_SERVICE_URL}/search/${search}`,
+    url: `${CONSTANTS.CONTACT_SERVICE_URL}/users/searchByCompanyName/${search}`,
   };
 
   yield put(searchActionRequest());

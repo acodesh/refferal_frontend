@@ -18,24 +18,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const posts = [post1, post2, post3];
-
-const sidebar = {
-  title: "About",
-  description:
-    "Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.",
-  archives: [
-    {title: "March 2020", url: "#"},
-    {title: "February 2020", url: "#"},
-    {title: "January 2020", url: "#"},
-    ,
-  ],
-  social: [
-    {name: "Twitter", icon: TwitterIcon},
-    {name: "Facebook", icon: FacebookIcon},
-  ],
-};
-
 export default function Single(props) {
   const classes = useStyles();
   const {sidebarDisplay, postData, error, isLoading} = props;
@@ -50,16 +32,9 @@ export default function Single(props) {
                 <Loader />
               </div>
             ) : (
-              <Main posts={posts} />
+              <Main post={postData} />
             )}
-            {sidebarDisplay && (
-              <Sidebar
-                title={sidebar.title}
-                description={sidebar.description}
-                archives={sidebar.archives}
-                social={sidebar.social}
-              />
-            )}
+            {sidebarDisplay && <Sidebar />}
           </Grid>
         </main>
       </Container>

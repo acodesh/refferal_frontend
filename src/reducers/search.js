@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   isLoadingSearch: false,
-  searchdData: {},
+  searchdData: [],
   searchError: "",
 };
 
@@ -24,7 +24,7 @@ const Search = (state = initialState, {type, payload}) => {
         ...state,
         isLoadingSearch: false,
         searchError: "",
-        searchdData: payload.response,
+        searchdData: payload.response.data || [],
       };
 
     case SEARCH_ACTION_FAILURE:
@@ -32,7 +32,7 @@ const Search = (state = initialState, {type, payload}) => {
         ...state,
         isLoadingSearch: false,
         searchError: payload.error,
-        searchdData: {},
+        searchdData: [],
       };
 
     default:

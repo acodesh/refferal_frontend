@@ -215,7 +215,7 @@ class Register extends React.Component {
                       handleChange={this.handleChange.bind(this, "bio")}
                     />
                   </div>
-                  <div className="form-group">
+                  {/* <div className="form-group">
                     <InputField
                       label={"Image"}
                       name="user_image"
@@ -224,7 +224,7 @@ class Register extends React.Component {
                       handleChange={this.handleChange.bind(this, "user_image")}
                       type={"file"}
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="modal-footer">
                   {userSignUpError && (

@@ -123,6 +123,7 @@ export function* userUpdateSaga({payload: userData}) {
   bodyFormData.set("transaction_email", userData.transaction_email);
   bodyFormData.set("last_name", userData.last_name);
   bodyFormData.set("first_name", userData.first_name);
+  bodyFormData.set("anonymous_name", userData.anonymous_name);
 
   const accessToken = getAccessToken();
 
