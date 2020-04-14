@@ -18,10 +18,10 @@ import {
 
 const initialState = {
   isLoadingPosts: false,
-  postsData: {},
+  postsData: [],
   postsError: "",
   isLoadingUserPosts: false,
-  postsUserData: {},
+  postsUserData: [],
   postsUserError: "",
   isLoadingSinglePost: false,
   singlePostData: {},
@@ -46,7 +46,7 @@ const Posts = (state = initialState, {type, payload}) => {
     case FETCH_POST_SUCCESS:
       return {
         ...state,
-        postsData: payload.data.response,
+        postsData: payload.response.data,
         isLoadingPosts: false,
         postsError: "",
       };
@@ -54,7 +54,7 @@ const Posts = (state = initialState, {type, payload}) => {
     case FETCH_POST_FAILURE:
       return {
         ...state,
-        postsData: {},
+        postsData: [],
         isLoadingPosts: false,
         postsError: payload.error,
       };
@@ -69,7 +69,7 @@ const Posts = (state = initialState, {type, payload}) => {
     case FETCH_USER_POST_SUCCESS:
       return {
         ...state,
-        postsUserData: payload.data.response,
+        postsUserData: payload.response.data,
         isLoadingUserPosts: false,
         postsUserError: "",
       };
@@ -77,7 +77,7 @@ const Posts = (state = initialState, {type, payload}) => {
     case FETCH_USER_POST_FAILURE:
       return {
         ...state,
-        postsUserData: {},
+        postsUserData: [],
         isLoadingUserPosts: false,
         postsUserError: payload.error,
       };
@@ -92,7 +92,7 @@ const Posts = (state = initialState, {type, payload}) => {
     case FETCH_SINGLE_POST_SUCCESS:
       return {
         ...state,
-        singlePostData: payload.data.response,
+        singlePostData: payload.response.data,
         isLoadingSinglePost: false,
         singlePostError: "",
       };
@@ -115,7 +115,7 @@ const Posts = (state = initialState, {type, payload}) => {
     case FETCH_SINGLE_USER_POST_SUCCESS:
       return {
         ...state,
-        singleUserPostData: payload.data.response,
+        singleUserPostData: payload.response.data,
         isLoadingSingleUserPost: false,
         singleUserPostError: "",
       };

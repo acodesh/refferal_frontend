@@ -16,7 +16,7 @@ import post3 from "./blog-post.3.md";
 import Loader from "../loader";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-import UserCard from "../../views/user-card";
+import PostCard from "../../views/post-card";
 
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
@@ -73,19 +73,19 @@ const sidebar = {
 export default function Blog(props) {
   const classes = useStyles();
 
-  const {isLoading, title, isFeaturePost, isFeaturePosts} = props;
+  const {isLoading, title, isFeaturePost, isFeaturePosts, data} = props;
   return (
     <React.Fragment>
       <CssBaseline />
       <Container maxWidth="lg">
         <main>
-          {isFeaturePost && <MainFeaturedPost post={mainFeaturedPost} />}
+          {/* {isFeaturePost && <MainFeaturedPost post={mainFeaturedPost} />}
           <Grid container spacing={4}>
             {isFeaturePosts &&
               featuredPosts.map((post) => (
                 <FeaturedPost key={post.title} post={post} />
               ))}
-          </Grid>
+          </Grid> */}
           <Grid container spacing={5} className={classes.mainGrid}>
             {isLoading ? (
               <div className="single-post-loader">
@@ -98,9 +98,8 @@ export default function Blog(props) {
                   {title}
                 </Typography>
                 <Divider />
-                {posts.map((post, key) => (
-                  <UserCard />
-                ))}
+                {data.length &&
+                  data.map((post, key) => <PostCard post={post} key={key} />)}
               </Grid>
             )}
 

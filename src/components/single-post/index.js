@@ -7,6 +7,8 @@ import ForgetPassword from "../forget-password";
 import Single from "../../views/blog/single";
 import {connect} from "react-redux";
 import {fetchSinglePost} from "../../actions/posts-action-type";
+import history from "../../routes/history";
+import {withRouter} from "react-router";
 
 class SinglePost extends React.Component {
   state = {
@@ -31,11 +33,16 @@ class SinglePost extends React.Component {
   };
 
   componentDidMount = () => {
-    this.props.fetchSinglePost();
+    const {id} = this.props.match.params;
+    if (!id) {
+      history.push("/");
+    }
+    this.props.fetchSinglePost(id);
   };
   render() {
     const {registerPopUp, loginPopUp, forgetPasswordPopUp} = this.state;
     const {isLoadingSinglePost, singlePostError, singlePostData} = this.props;
+    console.log("singlePostData", singlePostData);
     return (
       <>
         <Header action={this.togglePopup} />
@@ -73,4 +80,6 @@ const mapStateToProps = ({
   singlePostError,
   singlePostData,
 });
-export default connect(mapStateToProps, {fetchSinglePost})(SinglePost);
+export default withRouter(
+  connect(mapStateToProps, {fetchSinglePost})(SinglePost)
+);

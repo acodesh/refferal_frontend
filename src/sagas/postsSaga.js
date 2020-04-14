@@ -33,7 +33,7 @@ const {getAccessToken} = new User();
 
 export function* getPosts() {
   const payload = {
-    url: `${CONSTANTS.CONTACT_SERVICE_URL}/posts/postListing`,
+    url: `${CONSTANTS.CONTACT_SERVICE_URL}/posts/guestPostListing`,
   };
 
   yield put(fetchPostRequest());
@@ -51,7 +51,7 @@ export function* getUserPosts() {
   const accessToken = getAccessToken();
   const payload = {
     Authorization: `Bearer ${accessToken}`,
-    url: `${CONSTANTS.CONTACT_SERVICE_URL}/user/posts`,
+    url: `${CONSTANTS.CONTACT_SERVICE_URL}/posts/postListing`,
   };
 
   yield put(fetchUserPostRequest());
@@ -65,9 +65,10 @@ export function* getUserPosts() {
   }
 }
 
-export function* getSinglePost(id) {
+export function* getSinglePost({payload: id}) {
+  console.log("id", id);
   const payload = {
-    url: `${CONSTANTS.CONTACT_SERVICE_URL}/post/${id}`,
+    url: `${CONSTANTS.CONTACT_SERVICE_URL}/posts/guestGetPostById/${id}`,
   };
 
   yield put(fetchSinglePostRequest());
@@ -81,11 +82,11 @@ export function* getSinglePost(id) {
   }
 }
 
-export function* getSingleUserPost(id) {
+export function* getSingleUserPost({payload: id}) {
   const accessToken = getAccessToken();
   const payload = {
     Authorization: `Bearer ${accessToken}`,
-    url: `${CONSTANTS.CONTACT_SERVICE_URL}/user/post/${id}`,
+    url: `${CONSTANTS.CONTACT_SERVICE_URL}/posts/getPostById/${id}`,
   };
 
   yield put(fetchSingleUserPostRequest());

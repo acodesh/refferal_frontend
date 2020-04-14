@@ -1,7 +1,18 @@
 import React from "react";
-
+import history from "../../routes/history";
 class SubSection extends React.Component {
+  state = {
+    companyName: "",
+  };
+  companyClickHandler = (e) => {
+    const {target} = e;
+    this.setState({companyName: target.value});
+  };
+  clickHandler = () => {
+    history.push(`search/${this.state.companyName}`);
+  };
   render() {
+    const {companyName} = this.state;
     return (
       <>
         <section id="hero" style={{background: "#f5f5f5"}}>
@@ -19,15 +30,21 @@ class SubSection extends React.Component {
                   </h2>
                   <form className="form-inline">
                     <div className="form-group mb-2">
-                      <select className="form-control-plaintext">
+                      <select
+                        className="form-control-plaintext"
+                        onChange={this.companyClickHandler}
+                      >
                         <option>Choose a Company</option>
                         <option>Wipro</option>
-                        <option>Winux Software Solutions</option>
+                        <option>Facebook</option>
+                        <option>Google</option>
+                        <option>Wallmart</option>
                       </select>
                     </div>
                     <button
                       type="submit"
                       className="btn btn-primary mb-2 btn-get-started scrollto"
+                      onClick={this.clickHandler}
                     >
                       Continue
                     </button>
