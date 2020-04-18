@@ -28,5 +28,4 @@ jobs:
     - name: Migrate the Database
       run: |
         chmod +x ./ops/installapp.sh
-        sed -i "s|<SERVER_PATH>|$LIVE_SERVER_PATH|g" ./ops/installapp.sh
         sshpass -p "$LIVE_SERVER_PASSWORD" ssh $LIVE_SERVER_USERNAME@$LIVE_SERVER_HOST PROJECT_PATH="$LIVE_SERVER_PATH" 'bash' < ./ops/installapp.sh

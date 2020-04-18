@@ -19,6 +19,8 @@ npm install
 echo "installing pm2"
 npm install pm2
 
+npm run build
+
 #Restart the node server  
 echo "server reset"
-npm start
+pm2 start ecosystem.config.js
