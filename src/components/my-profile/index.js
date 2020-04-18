@@ -143,7 +143,7 @@ class MyProfile extends React.Component {
               <div className="my-posts-user-loader">
                 <Loader />
               </div>
-            ) : (
+            ) : Object.keys(userData).length !== 0 ? (
               <>
                 {/*<div class="form-group user-profile-form-group">
                   <label for="exampleInputEmail1">Profile Image</label>
@@ -162,7 +162,7 @@ class MyProfile extends React.Component {
                     type={"file"}
                   />
                 </div> */}
-                <div class="form-group user-profile-form-group">
+                <div className="form-group user-profile-form-group">
                   <InputField
                     label={"Anonymous Name"}
                     name="anonymous_name"
@@ -174,7 +174,7 @@ class MyProfile extends React.Component {
                     )}
                   />
                 </div>
-                <div class="form-group user-profile-form-group">
+                <div className="form-group user-profile-form-group">
                   <InputField
                     label={"First Name"}
                     name="first_name"
@@ -183,7 +183,7 @@ class MyProfile extends React.Component {
                     handleChange={this.handleChange.bind(this, "first_name")}
                   />
                 </div>
-                <div class="form-group user-profile-form-group">
+                <div className="form-group user-profile-form-group">
                   <InputField
                     label={"Last Name"}
                     name="last_name"
@@ -192,7 +192,7 @@ class MyProfile extends React.Component {
                     handleChange={this.handleChange.bind(this, "last_name")}
                   />
                 </div>
-                <div class="form-group user-profile-form-group">
+                <div className="form-group user-profile-form-group">
                   <InputField
                     label={"Email"}
                     name="email"
@@ -200,11 +200,11 @@ class MyProfile extends React.Component {
                     error={fieldValidations.email}
                     handleChange={this.handleChange.bind(this, "email")}
                   />
-                  <small id="emailHelp" class="form-text text-muted">
+                  <small id="emailHelp" className="form-text text-muted">
                     We'll never share your email with anyone else.
                   </small>
                 </div>
-                <div class="form-group user-profile-form-group">
+                <div className="form-group user-profile-form-group">
                   <InputField
                     label={"Transaction Email"}
                     name="transaction_email"
@@ -216,7 +216,7 @@ class MyProfile extends React.Component {
                     )}
                   />
                 </div>
-                <div class="form-group user-profile-form-group">
+                <div className="form-group user-profile-form-group">
                   <InputField
                     label={"Company Email"}
                     name="company_email"
@@ -250,6 +250,10 @@ class MyProfile extends React.Component {
                   />
                 </div>
               </>
+            ) : (
+              <div className="form-group user-profile-form-group alert alert-danger">
+                Server is not responding, please try again.
+              </div>
             )}
           </div>
         </Card>

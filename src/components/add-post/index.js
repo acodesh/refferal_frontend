@@ -30,6 +30,7 @@ class AddPost extends React.Component {
 
   handleChange = (field, e) => {
     const {target} = e;
+    console.log("asdasdas");
     const {fieldValidations} = this.state;
     if (
       (field === "title" && !fieldValidations.title) ||
@@ -47,7 +48,15 @@ class AddPost extends React.Component {
   };
 
   handleSubmitonClick = () => {
-    const {title, description, desired_company, post_anonymously} = this.state;
+    const {
+      title,
+      description,
+      desired_company,
+      post_anonymously,
+      number_of_professional,
+      pay_per_person,
+      dead_line,
+    } = this.state;
 
     let validation = true;
     let errorIn;
@@ -59,11 +68,15 @@ class AddPost extends React.Component {
       errorIn = {...errorIn, description: true};
       validation = false;
     }
-
     if (validation) {
       this.props.addPost({
         title,
         description,
+        desired_company,
+        post_anonymously,
+        number_of_professional,
+        pay_per_person,
+        dead_line,
       });
     } else {
       this.setState({fieldValidations: errorIn});
@@ -162,11 +175,13 @@ class AddPost extends React.Component {
               <TextField
                 id="outlined-multiline-static"
                 label="Description"
+                name="description"
                 multiline
                 rows="4"
                 defaultValue={description}
                 variant="outlined"
                 style={{width: "98%"}}
+                onChange={this.handleChange.bind(this, "description")}
               />
             </div>
             {addPostError && (
@@ -176,6 +191,8 @@ class AddPost extends React.Component {
               <ContainedButtons
                 title="Add"
                 onClick={() => this.handleSubmitonClick()}
+                loader={isLoadingAddPost}
+                disabled={isLoadingAddPost}
               />
             </div>
           </div>

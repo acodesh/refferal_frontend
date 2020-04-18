@@ -143,6 +143,7 @@ class RequestPost extends React.Component {
                       defaultValue={description}
                       variant="outlined"
                       style={{width: "98%"}}
+                      onChange={this.handleChange.bind(this, "description")}
                     />
                   </div>
                   <div className="form-group user-profile-form-group-full">
@@ -188,7 +189,7 @@ class RequestPost extends React.Component {
                       variant="outlined"
                       style={{width: "98%"}}
                       value={question_1}
-                      handleChange={(e) => this.handleChange("question_1", e)}
+                      onChange={(e) => this.handleChange("question_1", e)}
                     />
                   </div>
                   <div
@@ -204,7 +205,7 @@ class RequestPost extends React.Component {
                       variant="outlined"
                       style={{width: "98%"}}
                       value={question_2}
-                      handleChange={(e) => this.handleChange("question_2", e)}
+                      onChange={(e) => this.handleChange("question_2", e)}
                     />
                   </div>
                   {requestError && (
