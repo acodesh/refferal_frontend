@@ -152,21 +152,24 @@ export function* userUpdateSaga({payload: userData}) {
 
 export function* fetchUserDetailSaga() {
   const accessToken = getAccessToken();
+  const userDetails = userInfo();
 
   const payload = {
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${userDetails.token}`,
       "Access-Control-Request-Headers": "Content-Type, Authorization",
       "Content-Type": "multipart/form-data",
       "Access-Control-Allow-Origin": "*",
       Accept: "text/json",
     },
-    url: `${CONSTANTS.CONTACT_SERVICE_URL}/users/getuserdetailsbyId/${userInfo.userId}`,
+
+    //token: `${accessToken.token}`,
+    url: `${CONSTANTS.CONTACT_SERVICE_URL}/users/getuserdetailsbyId/${userDetails.userId}`,
   };
 
   yield put(getUserDetailsRequest());
 
-  const {data, error} = yield call(postRequest, payload);
+  const {data, error} = yield call(getRequest, payload);
 
   if (data && !error) {
     yield put(getUserDetailsSuccess(data));

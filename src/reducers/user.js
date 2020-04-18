@@ -115,7 +115,7 @@ const User = (state = initialState, {type, payload}) => {
         ...state,
         isLoadingUserDetails: false,
         userError: "",
-        userData: payload.response,
+        userData: {},
       };
 
     case FETCH_USER_DETAIL_FAILURE:
