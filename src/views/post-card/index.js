@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function UserCard(props) {
+export default function PostCard(props) {
   const {post} = props;
   const classes = useStyles();
 

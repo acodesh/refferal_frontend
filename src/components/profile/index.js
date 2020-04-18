@@ -4,13 +4,13 @@ import Footer from "../../views/footer";
 import Register from "../register";
 import Login from "../login";
 import ForgetPassword from "../forget-password";
-import Single from "../../views/blog/single";
+import ProfileView from "../../views/blog/profile-view";
 import {connect} from "react-redux";
 import {fetchSinglePost} from "../../actions/posts-action-type";
 import history from "../../routes/history";
 import {withRouter} from "react-router";
 
-class SinglePost extends React.Component {
+class Profile extends React.Component {
   state = {
     registerPopUp: false,
     loginPopUp: false,
@@ -33,21 +33,21 @@ class SinglePost extends React.Component {
   };
 
   componentDidMount = () => {
-    const {id} = this.props.match.params;
-    if (!id) {
+    const {user_id} = this.props.match.params;
+    if (!user_id) {
       history.push("/");
     }
-    this.props.fetchSinglePost(id);
+    this.props.fetchSinglePost(user_id);
   };
   render() {
     const {registerPopUp, loginPopUp, forgetPasswordPopUp} = this.state;
     const {isLoadingSinglePost, singlePostError, singlePostData} = this.props;
-    console.log("singlePostData", singlePostData);
+
     return (
       <>
         <Header action={this.togglePopup} />
         <div className="container container-posts">
-          <Single
+          <ProfileView
             postData={singlePostData}
             error={singlePostError}
             isLoading={isLoadingSinglePost}
@@ -80,6 +80,4 @@ const mapStateToProps = ({
   singlePostError,
   singlePostData,
 });
-export default withRouter(
-  connect(mapStateToProps, {fetchSinglePost})(SinglePost)
-);
+export default withRouter(connect(mapStateToProps, {fetchSinglePost})(Profile));

@@ -33,7 +33,7 @@ const {getAccessToken} = new User();
 
 export function* getPosts() {
   const payload = {
-    url: `${CONSTANTS.CONTACT_SERVICE_URL}/posts/postListing`,
+    url: `${CONSTANTS.CONTACT_SERVICE_URL}/posts/guestPostListing`,
   };
 
   yield put(fetchPostRequest());
@@ -50,8 +50,10 @@ export function* getPosts() {
 export function* getUserPosts() {
   const accessToken = getAccessToken();
   const payload = {
-    Authorization: `Bearer ${accessToken}`,
-    url: `${CONSTANTS.CONTACT_SERVICE_URL}/user/posts`,
+    headers: {
+      token: `${accessToken}`,
+    },
+    url: `${CONSTANTS.CONTACT_SERVICE_URL}/posts/postListing`,
   };
 
   yield put(fetchUserPostRequest());
@@ -65,9 +67,9 @@ export function* getUserPosts() {
   }
 }
 
-export function* getSinglePost(id) {
+export function* getSinglePost({payload: id}) {
   const payload = {
-    url: `${CONSTANTS.CONTACT_SERVICE_URL}/post/${id}`,
+    url: `${CONSTANTS.CONTACT_SERVICE_URL}/posts/guestGetPostById/${id}`,
   };
 
   yield put(fetchSinglePostRequest());
@@ -81,11 +83,13 @@ export function* getSinglePost(id) {
   }
 }
 
-export function* getSingleUserPost(id) {
+export function* getSingleUserPost({payload: id}) {
   const accessToken = getAccessToken();
   const payload = {
-    Authorization: `Bearer ${accessToken}`,
-    url: `${CONSTANTS.CONTACT_SERVICE_URL}/user/post/${id}`,
+    headers: {
+      token: `${accessToken}`,
+    },
+    url: `${CONSTANTS.CONTACT_SERVICE_URL}/posts/getPostById/${id}`,
   };
 
   yield put(fetchSingleUserPostRequest());
@@ -104,6 +108,11 @@ export function* addNewPost({payload: postData}) {
   var bodyFormData = new FormData();
   bodyFormData.set("title", postData.title);
   bodyFormData.set("description", postData.description);
+  bodyFormData.set("desired_company", postData.desired_company);
+  bodyFormData.set("post_anonymously", postData.post_anonymously);
+  bodyFormData.set("number_of_professional", postData.number_of_professional);
+  bodyFormData.set("pay_per_person", postData.pay_per_person);
+  bodyFormData.set("dead_line", postData.dead_line);
   const payload = {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -118,7 +127,7 @@ export function* addNewPost({payload: postData}) {
 
   yield put(addPostRequest());
 
-  const {data, error} = yield call(getRequest, payload);
+  const {data, error} = yield call(postRequest, payload);
 
   if (data && !error) {
     yield put(addPostSuccess(data));

@@ -12,6 +12,7 @@ import SingleUserPost from "../components/single-user-post";
 import AddPost from "../components/add-post";
 import Search from "../components/search";
 import Request from "../components/request";
+import Profile from "../components/profile";
 const Paths = [
   {
     component: Landing,
@@ -42,6 +43,12 @@ const Paths = [
     exact: true,
     path: "/request/:user_id",
     title: "Request",
+  },
+  {
+    component: Profile,
+    exact: true,
+    path: "/profile/:user_id",
+    title: "Profile",
   },
   {
     component: AccessControlRoutes,

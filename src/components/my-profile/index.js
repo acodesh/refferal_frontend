@@ -16,6 +16,7 @@ class MyProfile extends React.Component {
     company_name: "",
     bio: "",
     user_image: "",
+    anonymous_name: "",
     fieldValidations: {
       email: false,
       first_name: false,
@@ -25,6 +26,7 @@ class MyProfile extends React.Component {
       company_name: false,
       bio: false,
       user_image: false,
+      anonymous_name: false,
     },
   };
 
@@ -42,7 +44,8 @@ class MyProfile extends React.Component {
       props.userData.company_email !== state.company_email ||
       props.userData.transaction_email !== state.transaction_email ||
       props.userData.company_name !== state.company_name ||
-      props.userData.bio !== state.bio
+      props.userData.bio !== state.bio ||
+      props.userData.anonymous_name !== state.anonymous_name
     ) {
       this.setState(props.userData);
     }
@@ -60,7 +63,8 @@ class MyProfile extends React.Component {
       (field === "transaction_email" && !fieldValidations.transaction_email) ||
       (field === "company_name" && !fieldValidations.company_name) ||
       (field === "bio" && !fieldValidations.bio) ||
-      (field === "user_image" && !fieldValidations.user_image)
+      (field === "user_image" && !fieldValidations.user_image) ||
+      (field === "anonymous_name" && !fieldValidations.anonymous_name)
     ) {
       this.setState({
         [field]: target.value,
@@ -81,6 +85,7 @@ class MyProfile extends React.Component {
       company_email,
       last_name,
       first_name,
+      anonymous_name,
     } = this.state;
 
     let validation = true;
@@ -100,6 +105,7 @@ class MyProfile extends React.Component {
         company_email,
         last_name,
         first_name,
+        anonymous_name,
       });
     } else {
       this.setState({fieldValidations: errorIn});
@@ -117,6 +123,7 @@ class MyProfile extends React.Component {
       company_email,
       last_name,
       first_name,
+      anonymous_name,
     } = this.state;
 
     const {
@@ -136,11 +143,11 @@ class MyProfile extends React.Component {
               <div className="my-posts-user-loader">
                 <Loader />
               </div>
-            ) : (
+            ) : Object.keys(userData).length !== 0 ? (
               <>
-                <div class="form-group user-profile-form-group">
+                {/*<div class="form-group user-profile-form-group">
                   <label for="exampleInputEmail1">Profile Image</label>
-                  <img
+                   <img
                     class="profileimage"
                     src="https://thumbs.dreamstime.com/b/creative-illustration-default-avatar-profile-placeholder-isolated-background-art-design-grey-photo-blank-template-mockup-144855718.jpg"
                   />
@@ -154,8 +161,20 @@ class MyProfile extends React.Component {
                     handleChange={this.handleChange.bind(this, "user_image")}
                     type={"file"}
                   />
+                </div> */}
+                <div className="form-group user-profile-form-group">
+                  <InputField
+                    label={"Anonymous Name"}
+                    name="anonymous_name"
+                    value={anonymous_name}
+                    error={fieldValidations.anonymous_name}
+                    handleChange={this.handleChange.bind(
+                      this,
+                      "anonymous_name"
+                    )}
+                  />
                 </div>
-                <div class="form-group user-profile-form-group">
+                <div className="form-group user-profile-form-group">
                   <InputField
                     label={"First Name"}
                     name="first_name"
@@ -164,7 +183,7 @@ class MyProfile extends React.Component {
                     handleChange={this.handleChange.bind(this, "first_name")}
                   />
                 </div>
-                <div class="form-group user-profile-form-group">
+                <div className="form-group user-profile-form-group">
                   <InputField
                     label={"Last Name"}
                     name="last_name"
@@ -173,7 +192,7 @@ class MyProfile extends React.Component {
                     handleChange={this.handleChange.bind(this, "last_name")}
                   />
                 </div>
-                <div class="form-group user-profile-form-group">
+                <div className="form-group user-profile-form-group">
                   <InputField
                     label={"Email"}
                     name="email"
@@ -181,11 +200,11 @@ class MyProfile extends React.Component {
                     error={fieldValidations.email}
                     handleChange={this.handleChange.bind(this, "email")}
                   />
-                  <small id="emailHelp" class="form-text text-muted">
+                  <small id="emailHelp" className="form-text text-muted">
                     We'll never share your email with anyone else.
                   </small>
                 </div>
-                <div class="form-group user-profile-form-group">
+                <div className="form-group user-profile-form-group">
                   <InputField
                     label={"Transaction Email"}
                     name="transaction_email"
@@ -197,7 +216,7 @@ class MyProfile extends React.Component {
                     )}
                   />
                 </div>
-                <div class="form-group user-profile-form-group">
+                <div className="form-group user-profile-form-group">
                   <InputField
                     label={"Company Email"}
                     name="company_email"
@@ -231,6 +250,10 @@ class MyProfile extends React.Component {
                   />
                 </div>
               </>
+            ) : (
+              <div className="form-group user-profile-form-group alert alert-danger">
+                Server is not responding, please try again.
+              </div>
             )}
           </div>
         </Card>
