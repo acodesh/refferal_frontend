@@ -116,7 +116,6 @@ class MyProfile extends React.Component {
     }
 
     if (validation) {
-      console.log("bio", bio, first_name);
       this.props.updateUserData({
         email,
         user_image,
@@ -296,11 +295,15 @@ class MyProfile extends React.Component {
                   />
                 </div>
                 {updateError && (
-                  <div className="alert alert-danger">{updateError}</div>
+                  <div className="form-group user-profile-form-group-full alert alert-danger">
+                    {updateError}
+                  </div>
                 )}
 
                 {updateSuccess && (
-                  <div className="alert alert-success">{updateSuccess}</div>
+                  <div className="form-group user-profile-form-group-full alert alert-success">
+                    {updateSuccess}
+                  </div>
                 )}
               </>
             ) : (
