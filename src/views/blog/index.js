@@ -73,11 +73,18 @@ const sidebar = {
 export default function Blog(props) {
   const classes = useStyles();
 
-  const {isLoading, title, isFeaturePost, isFeaturePosts, data} = props;
+  const {
+    isLoading,
+    title,
+    isFeaturePost,
+    isFeaturePosts,
+    data,
+    isSidebar,
+  } = props;
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" style={{paddingBottom: "10px"}}>
         <main>
           {/* {isFeaturePost && <MainFeaturedPost post={mainFeaturedPost} />}
           <Grid container spacing={4}>
@@ -86,29 +93,38 @@ export default function Blog(props) {
                 <FeaturedPost key={post.title} post={post} />
               ))}
           </Grid> */}
-          <Grid container spacing={5} className={classes.mainGrid}>
-            {isLoading ? (
+          <Grid
+            container
+            spacing={5}
+            className={classes.mainGrid}
+            style={{marginTop: "0px"}}
+          >
+            {!!isLoading ? (
               <div className="single-post-loader">
                 <Loader />
               </div>
             ) : (
               // <Main title={title} posts={posts} />
-              <Grid item xs={12} md={8}>
+              <Grid item xs={12} md={isSidebar ? 8 : 12}>
                 <Typography variant="h6" gutterBottom>
                   {title}
                 </Typography>
                 <Divider />
-                {data.length &&
-                  data.map((post, key) => <PostCard post={post} key={key} />)}
+                {!!data.length &&
+                  data.map((post, key) => (
+                    <PostCard post={post} key={key} showAddButton={isSidebar} />
+                  ))}
               </Grid>
             )}
 
-            <Sidebar
-              title={sidebar.title}
-              description={sidebar.description}
-              archives={sidebar.archives}
-              social={sidebar.social}
-            />
+            {isSidebar && (
+              <Sidebar
+                title={sidebar.title}
+                description={sidebar.description}
+                archives={sidebar.archives}
+                social={sidebar.social}
+              />
+            )}
           </Grid>
         </main>
       </Container>

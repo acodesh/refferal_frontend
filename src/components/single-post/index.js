@@ -42,7 +42,7 @@ class SinglePost extends React.Component {
   render() {
     const {registerPopUp, loginPopUp, forgetPasswordPopUp} = this.state;
     const {isLoadingSinglePost, singlePostError, singlePostData} = this.props;
-    console.log("singlePostData", singlePostData);
+
     return (
       <>
         <Header action={this.togglePopup} />
