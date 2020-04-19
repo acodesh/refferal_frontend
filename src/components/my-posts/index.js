@@ -3,6 +3,7 @@ import Table from "../../views/table";
 import {connect} from "react-redux";
 import {fetchUserPost} from "../../actions/posts-action-type";
 import Loader from "../../views/loader";
+import Blog from "../../views/blog";
 
 const columns = [
   {title: "Name", field: "name"},
@@ -40,11 +41,13 @@ class MyPosts extends React.Component {
                 <Loader />
               </div>
             ) : (
-              <Table
+              <Blog
+                data={postsUserData}
+                isLoading={isLoadingUserPosts}
                 title={"My Posts"}
-                type={"posts"}
-                data={data}
-                columns={columns}
+                isFeaturePost={true}
+                isFeaturePosts={true}
+                isSidebar={false}
               />
             )}
           </div>

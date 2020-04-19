@@ -22,6 +22,7 @@ export default function Main(props) {
   function handleUserImgClick() {
     history.push("/profile/12");
   }
+
   return (
     <>
       <Grid item xs={12} md={8} style={{paddingTop: "0px", paddingLeft: "0px"}}>
@@ -77,12 +78,12 @@ export default function Main(props) {
               <div>
                 <h3 class="tags_tit">Desired companies</h3>
                 <div class="tags_list">
-                  <span title="tag" class="tag label label-info">
-                    Apple
-                  </span>
-                  <span title="tag" class="tag label label-info">
-                    Facebook
-                  </span>
+                  {post.desired_company &&
+                    post.desired_company.split(",").map((company, key) => (
+                      <span title="tag" class="tag label label-info" key={key}>
+                        {company}
+                      </span>
+                    ))}
                 </div>
               </div>
             </div>

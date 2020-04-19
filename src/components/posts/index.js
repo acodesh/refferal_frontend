@@ -48,6 +48,7 @@ class Posts extends React.Component {
             title={"Most Recent Posts"}
             isFeaturePost={true}
             isFeaturePosts={true}
+            isSidebar={true}
           />
         </div>
         <Footer />

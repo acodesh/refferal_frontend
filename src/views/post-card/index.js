@@ -34,13 +34,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PostCard(props) {
-  const {post} = props;
+  const {post, showAddButton} = props;
   const classes = useStyles();
 
   const handleAddClick = (id) => {
     history.push(`/request/${id}`);
   };
+  function handleCompanyClick(name) {
+    history.push(`/search/${name}`);
+  }
+  function calculateDays() {
+    var date1 = new Date();
+    var date2 = new Date(post.dead_line);
+    if (date1.getTime() < date2.getTime()) {
+      var Difference_In_Time = date2.getTime() - date1.getTime();
+      return Difference_In_Time / (1000 * 3600 * 24);
+    }
 
+    return "0";
+  }
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -50,25 +62,65 @@ export default function PostCard(props) {
           </Avatar>
         }
         action={
-          <IconButton
-            aria-label="settings"
-            onClick={() => handleAddClick(post.id)}
-          >
-            <AddIcon />
-          </IconButton>
+          showAddButton && (
+            <IconButton
+              aria-label="settings"
+              onClick={() => handleAddClick(post.id)}
+            >
+              <AddIcon />
+            </IconButton>
+          )
         }
         title={
           <Link variant="subtitle1" href={`/post/${post.id}`}>
             {post.title}
           </Link>
         }
-        subheader={post.createdAt}
+        subheader={new Date(post.createdAt).toTimeString()}
       />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
+      <CardContent style={{paddingTop: "0px"}}>
+        <div class="info">
+          <div class="mark">
+            <div class="tag_">
+              {post.desired_company &&
+                post.desired_company.split(",").map((company, key) => (
+                  <a
+                    class="tag"
+                    onClick={() => handleCompanyClick(company)}
+                    key={key}
+                  >
+                    {company}
+                  </a>
+                ))}
+            </div>
+          </div>
+        </div>
+        <div class="reward_info">
+          <div class="reward">
+            <strong>
+              <em class="currency">$</em> {post.pay_per_person}{" "}
+            </strong>{" "}
+            <span class="desc">Reward</span>
+          </div>{" "}
+          <div class="date">
+            <time class="time">
+              <span class="ico ico_clock"></span>{" "}
+              <span class="bx_dday">
+                <em> {parseInt(calculateDays())} days left </em>
+              </span>
+            </time>
+          </div>
+        </div>
+        {/* <Typography variant="body2" color="textSecondary" component="p">
           {post.description}
         </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {parseInt(calculateDays())} days left
+        </Typography> */}
       </CardContent>
     </Card>
   );
 }
+PostCard.defaultProps = {
+  showAddButton: true,
+};

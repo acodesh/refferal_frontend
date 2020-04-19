@@ -4,9 +4,9 @@ import Storage from "./storage";
 
 class User {
   getAccessToken = () => {
-    const {accessToken} = Storage.get("userDetails");
+    const {token} = Storage.get("userDetails");
 
-    return accessToken;
+    return token;
   };
 
   userInfo = () => {

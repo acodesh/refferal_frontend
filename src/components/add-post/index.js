@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import {addPost} from "../../actions/posts-action-type";
 import SimpleSelect from "../../views/simple-select";
 import DatePicker from "../../views/date-picker";
+import Divider from "@material-ui/core/Divider";
 
 class AddPost extends React.Component {
   state = {
@@ -17,6 +18,8 @@ class AddPost extends React.Component {
     number_of_professional: "",
     pay_per_person: "",
     dead_line: new Date("2014-08-18T21:11:54"),
+    question_2: "",
+    question_1: "",
     fieldValidations: {
       title: false,
       description: false,
@@ -25,12 +28,13 @@ class AddPost extends React.Component {
       number_of_professional: false,
       pay_per_person: false,
       dead_line: false,
+      question_2: false,
+      question_1: false,
     },
   };
 
   handleChange = (field, e) => {
     const {target} = e;
-    console.log("asdasdas");
     const {fieldValidations} = this.state;
     if (
       (field === "title" && !fieldValidations.title) ||
@@ -56,6 +60,8 @@ class AddPost extends React.Component {
       number_of_professional,
       pay_per_person,
       dead_line,
+      question_2,
+      question_1,
     } = this.state;
 
     let validation = true;
@@ -77,6 +83,8 @@ class AddPost extends React.Component {
         number_of_professional,
         pay_per_person,
         dead_line,
+        question_2,
+        question_1,
       });
     } else {
       this.setState({fieldValidations: errorIn});
@@ -93,6 +101,8 @@ class AddPost extends React.Component {
       number_of_professional,
       pay_per_person,
       dead_line,
+      question_2,
+      question_1,
     } = this.state;
     const {isLoadingAddPost, addPostError, addPostData} = this.props;
     return (
@@ -119,6 +129,9 @@ class AddPost extends React.Component {
                 error={fieldValidations.desired_company}
                 handleChange={this.handleChange.bind(this, "desired_company")}
               />
+              <small id="emailHelp" className="form-text text-muted">
+                Add multiple companies separate by ",".
+              </small>
             </div>
             <div className="form-group user-profile-form-group-full">
               <SimpleSelect
@@ -175,13 +188,51 @@ class AddPost extends React.Component {
               <TextField
                 id="outlined-multiline-static"
                 label="Description"
-                name="description"
                 multiline
                 rows="4"
                 defaultValue={description}
                 variant="outlined"
                 style={{width: "98%"}}
-                onChange={this.handleChange.bind(this, "description")}
+                value={description}
+                onChange={(e) => this.handleChange("description", e)}
+              />
+            </div>
+            <div className="form-group user-profile-form-group-full">
+              <Divider />
+            </div>
+            <div className="form-group">
+              <h3>Questions</h3>
+            </div>
+            <div
+              className="form-group user-profile-form-group-full"
+              style={{marginLeft: "10px"}}
+            >
+              <TextField
+                id="outlined-multiline-static"
+                label="Question 1"
+                multiline
+                rows="4"
+                defaultValue={question_1}
+                variant="outlined"
+                style={{width: "98%"}}
+                value={question_1}
+                onChange={(e) => this.handleChange("question_1", e)}
+              />
+            </div>
+            <div
+              className="form-group user-profile-form-group-full"
+              style={{marginLeft: "10px"}}
+            >
+              <TextField
+                id="outlined-multiline-static"
+                label="Question 2"
+                multiline
+                rows="4"
+                defaultValue={question_2}
+                variant="outlined"
+                style={{width: "98%"}}
+                value={question_2}
+                onChange={(e) => this.handleChange("question_2", e)}
               />
             </div>
             {addPostError && (

@@ -23,14 +23,14 @@ export default function Single(props) {
       <Container maxWidth="lg">
         <main>
           <Grid container spacing={5} className={classes.mainGrid}>
-            {!isLoading ? (
+            {isLoading ? (
               <div className="single-post-loader">
                 <Loader />
               </div>
             ) : (
               <Main post={postData} />
             )}
-            {sidebarDisplay && <SingleSidebar />}
+            {sidebarDisplay && <SingleSidebar postData={postData} />}
           </Grid>
         </main>
       </Container>
