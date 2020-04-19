@@ -49,6 +49,7 @@ export function* getPosts() {
 
 export function* getUserPosts() {
   const accessToken = getAccessToken();
+
   const payload = {
     headers: {
       token: `${accessToken}`,

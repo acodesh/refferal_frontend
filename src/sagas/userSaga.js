@@ -129,7 +129,7 @@ export function* userUpdateSaga({payload: userData}) {
 
   const payload = {
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      token: `${accessToken.token}`,
       "Access-Control-Request-Headers": "Content-Type, Authorization",
       "Content-Type": "multipart/form-data",
       "Access-Control-Allow-Origin": "*",
@@ -156,14 +156,12 @@ export function* fetchUserDetailSaga() {
 
   const payload = {
     headers: {
-      Authorization: `Bearer ${userDetails.token}`,
+      token: `${accessToken.token}`,
       "Access-Control-Request-Headers": "Content-Type, Authorization",
       "Content-Type": "multipart/form-data",
       "Access-Control-Allow-Origin": "*",
       Accept: "text/json",
     },
-
-    //token: `${accessToken.token}`,
     url: `${CONSTANTS.CONTACT_SERVICE_URL}/users/getuserdetailsbyId/${userDetails.userId}`,
   };
 
@@ -185,7 +183,6 @@ export function* forgetPasswordSaga({payload: userData}) {
   bodyFormData.set("email", userData.email);
   const payload = {
     headers: {
-      Authorization: `Bearer ${accessToken}`,
       "Access-Control-Request-Headers": "Content-Type, Authorization",
       "Content-Type": "multipart/form-data",
       "Access-Control-Allow-Origin": "*",

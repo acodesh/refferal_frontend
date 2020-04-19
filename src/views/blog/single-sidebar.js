@@ -30,13 +30,33 @@ const useStyles = makeStyles((theme) => ({
 export default function SingleSidebar(props) {
   const classes = useStyles();
 
+  const {
+    postData: {pay_per_person, createdAt, dead_line},
+  } = props;
+
+  function calculateDays() {
+    var date1 = new Date(createdAt);
+    var date2 = new Date(dead_line);
+
+    var Difference_In_Time = date2.getTime() - date1.getTime();
+
+    return Difference_In_Time / (1000 * 3600 * 24);
+  }
+
+  function isTaskClosed() {
+    var g1 = new Date();
+    var g2 = new Date(dead_line);
+    if (g1.getTime() < g2.getTime()) return false;
+    else return true;
+  }
   return (
     <aside className="side_area">
       <div id="requestDetailAttributeIScroll" className="iscroll">
         <section className="sec_read">
           <div className="sec_tit">
             <h3 className="price">
-              $30<em>/</em>
+              ${pay_per_person}
+              <em>/</em>
               <span>person</span>
             </h3>
             <div className="box_tools">
@@ -74,9 +94,12 @@ export default function SingleSidebar(props) {
                     </span>
                   </td>
                   <td className="t">
-                    02-17 10:30 (IST)
-                    <br />
-                    Closed
+                    {dead_line}
+                    {isTaskClosed && (
+                      <>
+                        <br /> Closed
+                      </>
+                    )}
                   </td>
                 </tr>
                 <tr className="t_deadline">
@@ -95,7 +118,7 @@ export default function SingleSidebar(props) {
                       </span>
                     </span>
                   </td>
-                  <td className="t point"> 3 days</td>
+                  <td className="t point"> {parseInt(calculateDays())} days</td>
                 </tr>
               </tbody>
             </table>
@@ -139,7 +162,7 @@ export default function SingleSidebar(props) {
                 type="button"
                 name="button"
                 disabled="disabled"
-                className="btn btn_point"
+                className="btn btn_disable"
               >
                 Completed
               </button>

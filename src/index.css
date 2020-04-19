@@ -2782,7 +2782,7 @@ ul {
   font-size: 0;
 }
 section {
-  width: 75% !important;
+  /* width: 75%; */
   padding: 0px;
 }
 .mypage_bx .pinfo.bx + .profile_sns_share {
@@ -2901,4 +2901,107 @@ section {
 .paragraph .h_tit h3 {
   word-wrap: break-word;
   word-break: break-word;
+}
+.btn_disable {
+  background: #d9d7d7 !important;
+  cursor: not-allowed !important;
+  color: #fff !important;
+  min-width: 119px !important;
+  min-height: 38px !important;
+  padding: 0 12px !important;
+  margin: 0 3px !important;
+  font-size: 14px !important;
+}
+.notice_area {
+  width: 75%;
+}
+.info {
+  margin-top: 16px;
+}
+.info {
+  position: relative;
+}
+.info {
+  min-height: auto;
+}
+.mark {
+  float: left;
+  padding: 0;
+  margin: -3px 0 20px;
+  box-sizing: border-box;
+}
+.mark .tag {
+  border: 1px solid #dfe0e2;
+  background: #f8f8f8;
+  font-size: 12px;
+  min-height: 24px;
+  color: #767e8b;
+  box-sizing: border-box;
+  vertical-align: top;
+  padding: 5px 8px 2px;
+}
+.mark .tag {
+  display: inline-block;
+  border-radius: 5px;
+  cursor: default;
+  font-weight: 400;
+  color: #767e8b;
+  margin-right: 4px;
+  margin-top: 4px;
+}
+.reward_info {
+  display: table;
+  table-layout: fixed;
+  margin-left: inherit;
+  width: 100%;
+  height: 20px;
+}
+.reward_info .reward {
+  display: table-cell;
+  vertical-align: middle;
+}
+.reward_info .reward strong {
+  white-space: nowrap;
+  font-size: 20px;
+  font-weight: 700;
+}
+.reward .currency {
+  padding-left: 2px;
+}
+.reward_info .reward strong {
+  white-space: nowrap;
+  font-size: 20px;
+  font-weight: 700;
+}
+.reward_info span.desc {
+  font-size: 14px;
+}
+.paragraph.add_viewux .h_tit .reward_info span.desc {
+  font-weight: 300;
+  color: #292929;
+}
+.reward_info .date {
+  position: relative;
+  bottom: inherit;
+  top: inherit;
+  right: inherit;
+  text-align: right;
+}
+.reward_info .date {
+  display: table-cell;
+  height: 100%;
+  vertical-align: middle;
+}
+.date .bx_dday {
+  font-size: 14px;
+}
+o .date .bx_dday {
+  line-height: 1.25em;
+}
+.date .bx_dday {
+  color: #fb4451;
+  font-weight: 700;
+}
+.mark {
+  background-color: #fff !important;
 }

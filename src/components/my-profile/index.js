@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import Card from "@material-ui/core/Card";
 import {updateUserData, getUserDetails} from "../../actions/user-action-type";
 import Loader from "../../views/loader";
-
+import TextField from "@material-ui/core/TextField";
 class MyProfile extends React.Component {
   state = {
     email: "",
@@ -17,6 +17,8 @@ class MyProfile extends React.Component {
     bio: "",
     user_image: "",
     anonymous_name: "",
+    linkedin_url: "",
+    propLoaded: false,
     fieldValidations: {
       email: false,
       first_name: false,
@@ -27,6 +29,7 @@ class MyProfile extends React.Component {
       bio: false,
       user_image: false,
       anonymous_name: false,
+      linkedin_url: false,
     },
   };
 
@@ -35,26 +38,41 @@ class MyProfile extends React.Component {
   };
 
   static getDerivedStateFromProps(props, state) {
+    console.log("bio", props.userData);
+    console.log("asdasd", state);
     if (Object.keys(props.userData).length === 0) return null;
 
     if (
-      props.userData.email !== state.email ||
-      props.userData.first_name !== state.first_name ||
-      props.userData.last_name !== state.last_name ||
-      props.userData.company_email !== state.company_email ||
-      props.userData.transaction_email !== state.transaction_email ||
-      props.userData.company_name !== state.company_name ||
-      props.userData.bio !== state.bio ||
-      props.userData.anonymous_name !== state.anonymous_name
+      (props.userData.email !== state.email ||
+        props.userData.first_name !== state.first_name ||
+        props.userData.last_name !== state.last_name ||
+        props.userData.company_email !== state.company_email ||
+        props.userData.transaction_email !== state.transaction_email ||
+        props.userData.company_name !== state.company_name ||
+        props.userData.bio !== state.bio ||
+        props.userData.anonymous_name !== state.anonymous_name ||
+        props.userData.linkedin_url !== state.linkedin_url) &&
+      !state.propLoaded
     ) {
-      this.setState(props.userData);
+      return {
+        ...props.userData,
+        propLoaded: true,
+      };
     }
     return null;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.selected !== prevProps.selected) {
+      this.selectNew();
+    }
   }
 
   handleChange = (field, e) => {
     const {target} = e;
     const {fieldValidations} = this.state;
+
+    console.log("bio", target.value);
     if (
       (field === "email" && !fieldValidations.email) ||
       (field === "first_name" && !fieldValidations.first_name) ||
@@ -64,7 +82,8 @@ class MyProfile extends React.Component {
       (field === "company_name" && !fieldValidations.company_name) ||
       (field === "bio" && !fieldValidations.bio) ||
       (field === "user_image" && !fieldValidations.user_image) ||
-      (field === "anonymous_name" && !fieldValidations.anonymous_name)
+      (field === "anonymous_name" && !fieldValidations.anonymous_name) ||
+      (field === "linkedin_url" && !fieldValidations.linkedin_url)
     ) {
       this.setState({
         [field]: target.value,
@@ -86,6 +105,7 @@ class MyProfile extends React.Component {
       last_name,
       first_name,
       anonymous_name,
+      linkedin_url,
     } = this.state;
 
     let validation = true;
@@ -96,6 +116,7 @@ class MyProfile extends React.Component {
     }
 
     if (validation) {
+      console.log("bio", bio, first_name);
       this.props.updateUserData({
         email,
         user_image,
@@ -106,6 +127,7 @@ class MyProfile extends React.Component {
         last_name,
         first_name,
         anonymous_name,
+        linkedin_url,
       });
     } else {
       this.setState({fieldValidations: errorIn});
@@ -124,6 +146,7 @@ class MyProfile extends React.Component {
       last_name,
       first_name,
       anonymous_name,
+      linkedin_url,
     } = this.state;
 
     const {
@@ -234,21 +257,51 @@ class MyProfile extends React.Component {
                     handleChange={this.handleChange.bind(this, "company_name")}
                   />
                 </div>
-                <div className="form-group user-profile-form-group-full">
+                <div className="form-group  user-profile-form-group">
                   <InputField
+                    label={"LinkedIn URL"}
+                    name="linkedin_url"
+                    value={linkedin_url}
+                    error={fieldValidations.linkedin_url}
+                    handleChange={this.handleChange.bind(this, "linkedin_url")}
+                  />
+                </div>
+                <div className="form-group user-profile-form-group-full">
+                  {/* <InputField
                     label={"Bio"}
                     name="bio"
                     value={bio}
                     error={fieldValidations.bio}
                     handleChange={this.handleChange.bind(this, "bio")}
+                  /> */}
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Bio"
+                    name="bio"
+                    multiline
+                    rows="4"
+                    defaultValue={bio}
+                    variant="outlined"
+                    style={{width: "98%"}}
+                    onChange={(e) => this.handleChange("bio", e)}
                   />
                 </div>
+
                 <div className="form-group user-profile-form-group-full">
                   <ContainedButtons
                     title="Save"
                     onClick={() => this.handleSubmitonClick()}
+                    loader={isLoadingUpdateUser}
+                    disabled={isLoadingUpdateUser}
                   />
                 </div>
+                {updateError && (
+                  <div className="alert alert-danger">{updateError}</div>
+                )}
+
+                {updateSuccess && (
+                  <div className="alert alert-success">{updateSuccess}</div>
+                )}
               </>
             ) : (
               <div className="form-group user-profile-form-group alert alert-danger">
