@@ -34,7 +34,7 @@ import Storage from "../utils/storage";
 import history from "../routes/history";
 
 const {
-  httpHelper: {getRequest, postRequest},
+  httpHelper: {getRequest, postRequest, putRequest},
 } = new Utils().getAll();
 
 const {getAccessToken, removeUserDetailsToken, userInfo} = new User();
@@ -124,24 +124,26 @@ export function* userUpdateSaga({payload: userData}) {
   bodyFormData.set("last_name", userData.last_name);
   bodyFormData.set("first_name", userData.first_name);
   bodyFormData.set("anonymous_name", userData.anonymous_name);
+  bodyFormData.set("linkedin_url", userData.anonymous_name);
+  bodyFormData.set("token", accessToken);
 
   const accessToken = getAccessToken();
-
+  const userDetails = userInfo();
   const payload = {
     headers: {
-      token: `${accessToken.token}`,
+      token: `${accessToken}`,
       "Access-Control-Request-Headers": "Content-Type, Authorization",
       "Content-Type": "multipart/form-data",
       "Access-Control-Allow-Origin": "*",
       Accept: "text/json",
     },
     data: bodyFormData,
-    url: `${CONSTANTS.CONTACT_SERVICE_URL}/users/update`,
+    url: `${CONSTANTS.CONTACT_SERVICE_URL}/users/update/${userDetails.userId}`,
   };
 
   yield put(updateUserDataRequest());
 
-  const {data, error} = yield call(postRequest, payload);
+  const {data, error} = yield call(putRequest, payload);
 
   if (data && !error) {
     yield put(updateUserDataSuccess(data));

@@ -51,6 +51,27 @@ class HttpHelper {
       status,
     };
   };
+
+  putRequest = async (args) => {
+    const {data, error, status} = await this.sendRequest({
+      ...args,
+      method: "put",
+    });
+
+    if (status === 204) {
+      return {
+        data,
+        error: null,
+        status,
+      };
+    }
+
+    return {
+      data: null,
+      error: error || data,
+      status,
+    };
+  };
 }
 
 export default HttpHelper;
