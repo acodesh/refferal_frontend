@@ -13,13 +13,21 @@ const {
   httpHelper: {getRequest, postRequest},
 } = new Utils().getAll();
 
-const {getAccessToken} = new User();
+const {getAccessToken, userInfo} = new User();
 
 function* fetchDashboardDetails() {
   const accessToken = getAccessToken();
+  const userDetails = userInfo();
+
   const payload = {
-    Authorization: `Bearer ${accessToken}`,
-    url: `${CONSTANTS.CONTACT_SERVICE_URL}/users/dashboard`,
+    headers: {
+      token: `${accessToken}`,
+      "Access-Control-Request-Headers": "Content-Type, Authorization",
+      "Content-Type": "multipart/form-data",
+      "Access-Control-Allow-Origin": "*",
+      Accept: "text/json",
+    },
+    url: `${CONSTANTS.CONTACT_SERVICE_URL}/users/dashboard/${userDetails.userId}`,
   };
 
   yield put(fetchUserDashboardRequest());

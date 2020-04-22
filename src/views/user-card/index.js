@@ -35,6 +35,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function UserCard(props) {
   const {post} = props;
+
+  console.log("post", post);
   const classes = useStyles();
 
   const handleAddClick = (id) => {
@@ -46,7 +48,7 @@ export default function UserCard(props) {
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            R
+            {post.first_name.charAt(0)}
           </Avatar>
         }
         action={
@@ -59,15 +61,32 @@ export default function UserCard(props) {
         }
         title={
           <Link variant="subtitle1" href={`/post/${post.id}`}>
-            {post.title}
+            {post.first_name} {post.last_name}
           </Link>
         }
-        subheader={post.createdAt}
+        subheader={<strong>{post.company_name}</strong>}
       />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {post.description}
-        </Typography>
+      <CardContent style={{paddingTop: "0px"}}>
+        <div class="info user-card-info">
+          <div class="mark">
+            <div class="tag_">
+              {post.company_name &&
+                post.company_name.split(",").map((company, key) => (
+                  <a class="tag" key={key}>
+                    {company}
+                  </a>
+                ))}
+            </div>
+          </div>
+        </div>
+        <div class="reward_info">
+          <div class="reward">
+            {post.bio.length > 200 ? post.bio.substr(0, 200) + "..." : post.bio}
+          </div>{" "}
+        </div>
+        {/* <Typography variant="body2" color="textSecondary" component="p">
+          {post.bio.length > 200 ? post.bio.substr(0, 200) + "..." : post.bio}
+        </Typography> */}
       </CardContent>
     </Card>
   );

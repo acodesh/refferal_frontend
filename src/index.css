@@ -3005,3 +3005,6 @@ o .date .bx_dday {
 .mark {
   background-color: #fff !important;
 }
+.user-card-info {
+  margin-top: 0px !important;
+}

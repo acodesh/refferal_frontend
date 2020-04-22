@@ -111,7 +111,6 @@ const User = (state = initialState, {type, payload}) => {
       };
 
     case FETCH_USER_DETAIL_SUCCESS:
-      console.log(payload.response.userdetails);
       return {
         ...state,
         isLoadingUserDetails: false,
