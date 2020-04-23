@@ -10,9 +10,6 @@ import MainFeaturedPost from "./MainFeaturedPost";
 import FeaturedPost from "./FeaturedPost";
 import Main from "./Main";
 import Sidebar from "./Sidebar";
-import post1 from "./blog-post.1.md";
-import post2 from "./blog-post.2.md";
-import post3 from "./blog-post.3.md";
 import Loader from "../loader";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
@@ -51,8 +48,6 @@ const featuredPosts = [
     imageText: "Image Text",
   },
 ];
-
-const posts = [post1, post2, post3];
 
 const sidebar = {
   title: "About",

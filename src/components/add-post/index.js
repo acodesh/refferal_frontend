@@ -20,6 +20,7 @@ class AddPost extends React.Component {
     dead_line: new Date("2014-08-18T21:11:54"),
     question_2: "",
     question_1: "",
+    pay_each_person: "",
     fieldValidations: {
       title: false,
       description: false,
@@ -30,6 +31,7 @@ class AddPost extends React.Component {
       dead_line: false,
       question_2: false,
       question_1: false,
+      pay_each_person: false,
     },
   };
 
@@ -62,6 +64,7 @@ class AddPost extends React.Component {
       dead_line,
       question_2,
       question_1,
+      pay_each_person,
     } = this.state;
 
     let validation = true;
@@ -85,6 +88,7 @@ class AddPost extends React.Component {
         dead_line,
         question_2,
         question_1,
+        pay_each_person,
       });
     } else {
       this.setState({fieldValidations: errorIn});
@@ -103,6 +107,7 @@ class AddPost extends React.Component {
       dead_line,
       question_2,
       question_1,
+      pay_each_person,
     } = this.state;
     const {isLoadingAddPost, addPostError, addPostData} = this.props;
     return (
@@ -161,7 +166,7 @@ class AddPost extends React.Component {
             </div>
             <div className="form-group user-profile-form-group-full">
               <SimpleSelect
-                title={"Pay Per Person"}
+                title={"How much will you pay each person?"}
                 name="pay_per_person"
                 value={pay_per_person}
                 error={fieldValidations.pay_per_person}
@@ -173,8 +178,20 @@ class AddPost extends React.Component {
               />
             </div>
             <div className="form-group user-profile-form-group-full">
+              <InputField
+                type={"number"}
+                label={"How much will you pay each person?"}
+                name="pay_each_person"
+                value={pay_each_person}
+                error={fieldValidations.pay_each_person}
+                handleChange={this.handleChange.bind(this, "pay_each_person")}
+              />
+            </div>
+            <div className="form-group user-profile-form-group-full">
               <DatePicker
-                title={"Dead Line"}
+                title={
+                  "I want to keep this project open for applications until..."
+                }
                 name="dead_line"
                 value={dead_line}
                 error={fieldValidations.dead_line}
