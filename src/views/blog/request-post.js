@@ -1,243 +1,178 @@
 import React from "react";
-
-import {withStyles} from "@material-ui/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
+import {makeStyles} from "@material-ui/core/styles";
+import Stepper from "@material-ui/core/Stepper";
+import Step from "@material-ui/core/Step";
+import StepLabel from "@material-ui/core/StepLabel";
+import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import TextField from "@material-ui/core/TextField";
-import InputField from "../../views/input-field";
-import ContainedButtons from "../../views/contained-buttons";
-import {withRouter} from "react-router";
+import RequestFormOne from "./request-form-one";
+import RequestFormTwo from "./request-form-two";
+import RequestFormThree from "./request-form-three";
 import {addRequest} from "../../actions/request-action-type";
 import {connect} from "react-redux";
 
-const styles = (theme) => ({
-  mainGrid: {
-    marginTop: 3,
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
   },
-});
+  backButton: {
+    marginRight: theme.spacing(1),
+  },
+  instructions: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
+}));
 
-class RequestPost extends React.Component {
-  state = {
-    title: "",
-    description: "",
-    desired_company: "",
-    linkedin_url: "",
-    question_1: "",
-    question_2: "",
-    fieldValidations: {
-      title: false,
-      description: false,
-      desired_company: false,
-      linkedin_url: false,
-      question_1: false,
-      question_2: false,
-    },
-  };
+const style = {
+  backgroundColor: "#009cea",
+  fontFamily: '"Raleway", sans-serif',
+  fontWeight: "600",
+  fontSize: "13px",
+  textTransform: "uppercase",
+  letterSpacing: "1px",
+  display: "inline-block",
+  padding: "12px 28px",
+  borderRadius: "3px",
+  transition: "0.5s",
+  color: "#fff",
+};
+function getSteps() {
+  return ["Describe your request", "Fill your details", "Submit Request"];
+}
 
-  handleChange = (field, e) => {
-    const {target} = e;
-    const {fieldValidations} = this.state;
-    if (
-      (field === "title" && !fieldValidations.title) ||
-      (field === "description" && !fieldValidations.description)
-    ) {
-      this.setState({
-        [field]: target.value,
-        fieldValidations: {[field]: false},
-      });
-    } else {
-      this.setState({[field]: target.value});
-    }
-  };
-
-  handleSubmitonClick = () => {
-    const {
-      title,
-      description,
-      desired_company,
-      linkedin_url,
-      question_1,
-      question_2,
-    } = this.state;
-
-    let validation = true;
-    let errorIn;
-    if (!title) {
-      errorIn = {title: true};
-      validation = false;
-    }
-    if (!description) {
-      errorIn = {...errorIn, description: true};
-      validation = false;
-    }
-    if (!desired_company) {
-      errorIn = {...errorIn, desired_company: true};
-      validation = false;
-    }
-
-    if (validation) {
-      this.props.addRequest({
-        title,
-        description,
-        desired_company,
-        linkedin_url,
-        question_2,
-        question_1,
-        user_id: this.props.user_id,
-      });
-    } else {
-      this.setState({fieldValidations: errorIn});
-    }
-  };
-
-  render() {
-    const {
-      classes,
-      isLoadingRequest,
-      requestData,
-      requestError,
-      user_id,
-    } = this.props;
-    const {
-      fieldValidations,
-      description,
-      title,
-      desired_company,
-      linkedin_url,
-      question_1,
-      question_2,
-    } = this.state;
-    return (
-      <React.Fragment>
-        <CssBaseline />
-        <Container maxWidth="lg">
-          <main>
-            <Grid container spacing={5} className={classes.mainGrid}>
-              <Grid item xs={12} md={12}>
-                <Typography variant="h6" gutterBottom>
-                  Let's get started on your question
-                </Typography>
-                <Divider />
-                <div class="row">
-                  <div className="form-group user-profile-form-group-full">
-                    <InputField
-                      label={"Title"}
-                      name="title"
-                      value={title}
-                      error={fieldValidations.title}
-                      handleChange={this.handleChange.bind(this, "title")}
-                    />
-                  </div>
-                  <div
-                    className="form-group user-profile-form-group-full"
-                    style={{marginLeft: "10px"}}
-                  >
-                    <TextField
-                      id="outlined-multiline-static"
-                      label="Description"
-                      multiline
-                      rows="4"
-                      defaultValue={description}
-                      variant="outlined"
-                      style={{width: "98%"}}
-                      onChange={this.handleChange.bind(this, "description")}
-                    />
-                  </div>
-                  <div className="form-group user-profile-form-group-full">
-                    <InputField
-                      label={"Desired Company"}
-                      name="desired_company"
-                      value={desired_company}
-                      error={fieldValidations.desired_company}
-                      value={desired_company}
-                      handleChange={(e) =>
-                        this.handleChange("desired_company", e)
-                      }
-                    />
-                  </div>
-                  <div className="form-group user-profile-form-group-full">
-                    <InputField
-                      label={"Linkedin Profile URL (Optional)"}
-                      name="linkedin_url"
-                      value={linkedin_url}
-                      error={fieldValidations.linkedin_url}
-                      handleChange={this.handleChange.bind(
-                        this,
-                        "linkedin_url"
-                      )}
-                    />
-                  </div>
-                  <div className="form-group user-profile-form-group-full">
-                    <Divider />
-                  </div>
-                  <div className="form-group">
-                    <h3>Questions</h3>
-                  </div>
-                  <div
-                    className="form-group user-profile-form-group-full"
-                    style={{marginLeft: "10px"}}
-                  >
-                    <TextField
-                      id="outlined-multiline-static"
-                      label="Question 1"
-                      multiline
-                      rows="4"
-                      defaultValue={question_1}
-                      variant="outlined"
-                      style={{width: "98%"}}
-                      value={question_1}
-                      onChange={(e) => this.handleChange("question_1", e)}
-                    />
-                  </div>
-                  <div
-                    className="form-group user-profile-form-group-full"
-                    style={{marginLeft: "10px"}}
-                  >
-                    <TextField
-                      id="outlined-multiline-static"
-                      label="Question 2"
-                      multiline
-                      rows="4"
-                      defaultValue={question_2}
-                      variant="outlined"
-                      style={{width: "98%"}}
-                      value={question_2}
-                      onChange={(e) => this.handleChange("question_2", e)}
-                    />
-                  </div>
-                  {requestError && (
-                    <div className="alert alert-danger">{requestError}</div>
-                  )}
-
-                  {requestData && (
-                    <div className="alert alert-success">{requestData}</div>
-                  )}
-                  <div className="form-group user-profile-form-group-full">
-                    <ContainedButtons
-                      title="Request"
-                      onClick={() => this.handleSubmitonClick()}
-                    />
-                  </div>
-                </div>
-              </Grid>
-            </Grid>
-          </main>
-        </Container>
-      </React.Fragment>
-    );
+function getStepContent(stepIndex) {
+  switch (stepIndex) {
+    case 0:
+      return <RequestFormOne />;
+    case 1:
+      return <RequestFormTwo />;
+    case 2:
+      return <RequestFormThree />;
+    default:
+      return "Unknown stepIndex";
   }
 }
+
+function RequestPost(props) {
+  const classes = useStyles();
+  const [activeStep, setActiveStep] = React.useState(0);
+  const [validateOne, setValidateOne] = React.useState(0);
+  const steps = getSteps();
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const submitRequest = () => {
+    props.addRequest(props.request);
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
+  };
+
+  return (
+    <div className={classes.root}>
+      <Stepper activeStep={activeStep} alternativeLabel>
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+      <>
+        {activeStep === steps.length ? (
+          <div>
+            <Typography className={classes.instructions} component={"span"}>
+              All steps completed
+            </Typography>
+            <Button onClick={handleReset}>Reset</Button>
+          </div>
+        ) : (
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "space-between",
+              paddingTop: "20px",
+            }}
+          >
+            <div style={{background: "#fff", width: "68%", padding: "40px"}}>
+              <Typography className={classes.instructions} component={"span"}>
+                {activeStep == 0 && <RequestFormOne handleNext={handleNext} />}
+                {activeStep == 1 && <RequestFormTwo handleNext={handleNext} />}
+                {activeStep == 2 && (
+                  <RequestFormThree handleNext={handleNext} />
+                )}
+                {activeStep == 3 && "Unknown stepIndex"}
+              </Typography>
+              <div style={{display: "flex", justifyContent: "center"}}>
+                {!props.requestData && (
+                  <>
+                    <Button
+                      disabled={activeStep === 0}
+                      onClick={handleBack}
+                      className={classes.backButton}
+                      style={style}
+                    >
+                      Back
+                    </Button>
+
+                    {activeStep === steps.length - 1 && (
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        //onClick={handleNext}
+                        onClick={submitRequest}
+                        style={style}
+                      >
+                        Submit
+                      </Button>
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
+            <div style={{width: "30%", padding: "20px"}}>
+              <div class="saying">
+                <h2>
+                  What people are saying about <strong>Referral</strong>
+                </h2>{" "}
+                <div class="reviews">
+                  <div class="review">
+                    <div class="rating">
+                      {" "}
+                      <div class="by">UESU26</div>{" "}
+                      <div class="txtwp">
+                        <p class="txt">
+                          "Got a referral for Palantir technologies. Very
+                          friendly and immensely helpful!"
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </>
+    </div>
+  );
+}
+
 const mapStateToProps = ({
-  Request: {isLoadingRequest, requestData, requestError},
+  Request: {isLoadingRequest, requestData, requestError, request},
 }) => ({
   isLoadingRequest,
   requestData,
   requestError,
+  request,
 });
 
-export default withStyles(styles)(
-  withRouter(connect(mapStateToProps, {addRequest})(RequestPost))
-);
+export default connect(mapStateToProps, {addRequest})(RequestPost);

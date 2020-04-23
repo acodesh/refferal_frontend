@@ -3,17 +3,13 @@ import {makeStyles} from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import FacebookIcon from "@material-ui/icons/Facebook";
-import TwitterIcon from "@material-ui/icons/Twitter";
 
 import Sidebar from "./Sidebar";
-import post1 from "./blog-post.1.md";
-import post2 from "./blog-post.2.md";
-import post3 from "./blog-post.3.md";
 import Loader from "../loader";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import UserCard from "../../views/user-card";
+import history from "../../routes/history";
 
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
@@ -23,6 +19,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SearchUser(props) {
   const classes = useStyles();
+
+  const handleReferrClick = (id) => {
+    history.push(`/request/1`);
+  };
 
   const {isLoading, title, data} = props;
   return (
@@ -41,8 +41,26 @@ export default function SearchUser(props) {
                   {title}
                 </Typography>
                 <Divider />
-                {data.length &&
-                  data.map((post, key) => <UserCard post={post} key={key} />)}
+                {data.length ? (
+                  data.map((post, key) => <UserCard post={post} key={key} />)
+                ) : (
+                  <div class="notfind">
+                    <div class="message">
+                      <span>
+                        Can't find the advice you need?
+                        <br />
+                        Verified professionals are waiting to answer your
+                        questions.
+                      </span>
+                    </div>{" "}
+                    <button
+                      class="btn_write_post"
+                      onClick={handleReferrClick}
+                    >
+                      <span>+ Ask Questions</span>
+                    </button>
+                  </div>
+                )}
               </Grid>
             )}
 

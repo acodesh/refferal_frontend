@@ -2,12 +2,14 @@ import {
   ADD_REQUEST_SUCCESS,
   ADD_REQUEST_REQUEST,
   ADD_REQUEST_FAILURE,
+  ADD_REQUEST_DATA,
 } from "../actions/request-action-type";
 
 const initialState = {
   isLoadingRequest: false,
   requestData: "",
   requestError: "",
+  request: {},
 };
 
 const Request = (state = initialState, {type, payload}) => {
@@ -33,6 +35,13 @@ const Request = (state = initialState, {type, payload}) => {
         isLoadingRequest: false,
         requestError: payload.error,
         requestData: "",
+      };
+
+    case ADD_REQUEST_DATA:
+      console.log("payload", payload);
+      return {
+        ...state,
+        request: {...payload},
       };
 
     default:
