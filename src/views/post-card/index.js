@@ -40,6 +40,7 @@ export default function PostCard(props) {
   const handleAddClick = (id) => {
     history.push(`/request/${id}`);
   };
+
   function handleCompanyClick(name) {
     history.push(`/search/${name}`);
   }

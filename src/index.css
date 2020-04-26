@@ -3005,3 +3005,140 @@ o .date .bx_dday {
 .mark {
   background-color: #fff !important;
 }
+.user-card-info {
+  margin-top: 0px !important;
+}
+.notfind {
+  padding: 140px 10px 172px;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.notfind::before {
+  width: 88px;
+  height: 88px;
+
+  background-size: 735.36px 852.48px;
+  background-position: -286.08px -372.48px;
+}
+.notfind .message {
+  font-size: 20px;
+}
+.notfind .message {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.28em;
+  color: #767e8b;
+}
+.notfind .btn_write_post {
+  margin-top: 30px;
+  font-size: 14px;
+  min-width: 130px;
+  height: 40px;
+}
+.notfind .btn_write_post {
+  font-weight: 700;
+  color: #fff;
+  background-color: #fb4451;
+  border: 1px solid #fb4451;
+
+  padding: 0 14.5px;
+
+  line-height: 30px;
+  border-radius: 5px;
+}
+.saying {
+  margin-top: 59px;
+}
+.saying h2 {
+  font-size: 22px;
+
+  line-height: 1.43em;
+}
+.saying h2 strong {
+  display: block;
+}
+.saying .review {
+  margin-top: 30px;
+}
+.review .by {
+  display: inline-block;
+  padding-left: 6px;
+  font-size: 14px;
+}
+.review .txtwp .txt {
+  overflow: hidden;
+  position: relative;
+  max-height: 88px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.4em;
+}
+.review .txtwp .txt::before {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding-left: 20px;
+  background: linear-gradient(
+    90deg,
+    hsla(0, 0%, 100%, 0),
+    #f8f8f8 20%,
+    #f8f8f8
+  );
+  content: "...\201D";
+}
+.review .txtwp .txt::after {
+  position: absolute;
+  right: 0;
+  width: 1.1em;
+  height: 1em;
+  margin-top: 0.2em;
+  background-color: #f8f8f8;
+  content: "";
+}
+.ux_write {
+  max-width: 640px;
+  margin: 0;
+  padding: 77px 80px 100px;
+  border: 1px solid #eaeaea;
+}
+.ux_write {
+  min-height: calc(100vh - 90px);
+
+  box-sizing: border-box;
+}
+.sec_payment.payment_info {
+  margin: 30px 30px 50px 30px;
+}
+.sec_payment.payment_info .sec_tit {
+  margin-top: 0;
+  padding: 10px 0;
+}
+.sec_payment .sec_tit .topic {
+  font-size: 14px;
+}
+.sec_payment.payment_info .sec_tit .box_tit {
+  margin-top: 8px;
+  font-size: 20px;
+  line-height: 1.3em;
+}
+.sec_payment.payment_info .sec_tit .tags_list {
+  margin-top: 30px;
+}
+.sec_payment.payment_info .tbl_report {
+  padding-top: 30px;
+}
+.sec_payment.payment_info .tbl_report {
+  margin-top: 10px;
+  border-top: 1px solid #bcc0c7;
+}
+.tbl_report table {
+  width: 100%;
+}
+.tbl_report table thead {
+  height: 0;
+  display: none;
+  overflow: hidden;
+}

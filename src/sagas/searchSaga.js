@@ -8,13 +8,23 @@ import {
 import Utils from "../utils";
 import CONSTANTS from "../constants";
 import User from "../utils/user";
-
+const {getAccessToken, userInfo} = new User();
 const {
   httpHelper: {getRequest, postRequest},
 } = new Utils().getAll();
 
-function* searchUser() {
+function* searchUser({payload: search}) {
+  const accessToken = getAccessToken();
+
+  console.log("accessToken", accessToken, search);
   const payload = {
+    headers: {
+      token: `${accessToken}`,
+      "Access-Control-Request-Headers": "Content-Type, Authorization",
+      "Content-Type": "multipart/form-data",
+      "Access-Control-Allow-Origin": "*",
+      Accept: "text/json",
+    },
     url: `${CONSTANTS.CONTACT_SERVICE_URL}/users/searchByCompanyName/${search}`,
   };
 
